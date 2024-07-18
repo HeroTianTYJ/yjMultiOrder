@@ -1,0 +1,15 @@
+<table class="detail">
+  <tr><td>账单名称：</td><td>{$One['name']}</td></tr>
+  <tr><td>所属管理员：</td><td>{$One['manager']}</td></tr>
+  <tr><td>账单分类：</td><td>{$One['bill_sort']}</td></tr>
+  {if condition="$One['in']!=0"}<tr><td>收入单价：</td><td>{$One['in_price']}元　数量：{$One['in_count']}　总价：{$One['in']}元</td></tr>{/if}
+  {if condition="$One['in_out']!=0"}<tr><td>成本/退款：</td><td>{$One['in_price_out']}元　数量：{$One['in_count_out']}　总价：{$One['in_out']}元</td></tr>{/if}
+  {if condition="$One['out']!=0"}<tr><td>支出单价：</td><td>{$One['out_price']}元　数量：{$One['out_count']}　总价：{$One['out']}元</td></tr>{/if}
+  {if condition="$One['out_in']!=0"}<tr><td>退款单价：</td><td>{$One['out_price_in']}元　数量：{$One['out_count_in']}　总价：{$One['out_in']}元</td></tr>{/if}
+  <tr><td>本单合计：</td><td>{$One['sum']}元</td></tr>
+  <tr><td>当前收入：</td><td>{$One['all_in']}元</td></tr>
+  <tr><td>当前支出：</td><td>{$One['all_out']}元</td></tr>
+  <tr><td>当前余额：</td><td>{$One['all_add']}元</td></tr>
+  <tr><td>备　　注：</td><td>{$One['note']|htmlBrNbsp}</td></tr>
+  <tr><td>时　　间：</td><td>{$One['date']|dateFormat}</td></tr>
+</table>

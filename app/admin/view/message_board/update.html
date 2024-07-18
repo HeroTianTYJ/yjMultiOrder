@@ -1,0 +1,11 @@
+<form method="post" action="" class="form layui-form {:request()->action()}" onsubmit="return false;">
+  <table>
+    <tr><td>留言板名称：</td><td><input type="text" name="name" value="{$One['name']}" class="text"></td></tr>
+    <tr><td>留言字段：</td><td>{$Field}</td></tr>
+    <tr><td>验 证 码：</td><td><select name="captcha_id" lay-search>{$Captcha}</select></td></tr>
+    <tr><td>留言间隔：</td><td><input type="text" name="time" value="{$One['time']}" class="text"></td></tr>
+    <tr class="tip"><td></td><td>同一IP下，留言提交间隔，防止恶意提交（单位：秒）</td></tr>
+    <tr><td>每页留言数：</td><td><input type="text" name="page" value="{$One['page']}" class="text"></td></tr>
+    <tr class="tip"><td></td><td>设置前台留言内容的每页留言条数</td></tr>
+  </table>
+</form>

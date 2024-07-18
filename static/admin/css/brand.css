@@ -1,0 +1,21 @@
+@charset "utf-8";
+.form table tr td:nth-child(1) {
+    width: 73px;
+}
+
+.layui-layer .layui-layer-content {
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+}
+
+.main .tool.advance form.search label.wxxcx_id .form-select {
+    width: 139px;
+}
+.main .tool.advance form.search label.manager_id .form-select {
+    width: 167px;
+}
+.main .list table tr td img {
+    width: 140px;
+    position: relative;
+    top: 4px;
+}

@@ -1,0 +1,49 @@
+{extend name="../../common/view/public/base" /}
+
+{block name="title"}数据{/block}
+
+{block name="head"}<link rel="stylesheet" type="text/css" href="static/admin/css/{:parse_name(request()->controller())}.css?{:staticCache()}">
+<script type="text/javascript">
+CONFIG['PAGE_SIZE'] = {:config('app.page_size')};
+CONFIG['TOTAL'] = {$Total};
+CONFIG['LIST'] = window.location;
+CONFIG['ADD'] = '{:url("/".parse_name(request()->controller())."/add")}';
+CONFIG['ADD_DO'] = '{:url("/".parse_name(request()->controller())."/add",["action"=>"do"])}';
+CONFIG['UPDATE'] = '{:url("/".parse_name(request()->controller())."/update")}';
+CONFIG['UPDATE_DO'] = '{:url("/".parse_name(request()->controller())."/update",["action"=>"do"])}';
+CONFIG['DELETE'] = '{:url("/".parse_name(request()->controller())."/delete")}';
+CONFIG['WEB_URL'] = '{:config("url.web1")}';
+</script>{/block}
+
+{block name="main"}
+<div class="tool">
+  <div class="row1">
+    <h2>验证码</h2>
+  
+    <input type="hidden" name="ids">
+  
+    <div class="button">
+      {if condition="isPermission('add')"}<input type="button" value="添加验证码" class="button add">{/if}
+      {if condition="isPermission('delete')"}<input type="button" value="批量删除" class="button disabled must_select delete" disabled>{/if}
+    </div>
+  
+    <form method="get" action="" class="search layui-form" onsubmit="return false;">
+    </form>
+  
+    <p class="clear"></p>
+  </div>
+</div>
+
+<div class="list">
+  {if condition="$Total>0"}
+  <table class="{if condition="isPermission('delete')"}left-fix{/if} right-fix">
+    <thead><tr class="row1">{if condition="isPermission('delete')"}<th style="width:60px;"><div class="check-box"><label><input type="checkbox" class="all">全选</label></div></th>{/if}<th style="width:150px;">验证码名称</th><th style="width:100px;">验证码类型</th><th style="width:50px;">位数</th><th style="width:50px;">字号</th><th style="width:50px;">宽度</th><th style="width:50px;">高度</th><th style="width:80px;">背景颜色</th><th style="width:60px;">背景图</th><th style="width:80px;">混淆曲线</th><th style="width:60px;">杂点</th><th style="width:100px;">操作</th></tr></thead>
+    <tbody class="items"></tbody>
+  </table>
+
+  <div class="pagination"><ul></ul></div>
+  {else/}
+  <p class="nothing"></p>
+  {/if}
+</div>
+{/block}

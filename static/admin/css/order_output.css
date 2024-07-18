@@ -1,0 +1,17 @@
+@charset "utf-8";
+.form table tr td:nth-child(1) {
+    width: auto;
+    text-align: left;
+}
+.form table tr td ul li {
+    border: 1px solid #2489C5;
+    margin: 3px;
+    padding: 5px;
+    border-radius: 2px;
+    float: left;
+    cursor: move;
+    line-height: 25px;
+}
+.form table tr td ul li .check-box {
+    padding-right: 0;
+}

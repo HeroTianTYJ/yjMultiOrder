@@ -1,0 +1,18 @@
+<script type="text/javascript" src="static/distributor/js/{:parse_name(request()->controller())}_form.js?{:staticCache()}"></script>
+<script type="text/javascript">
+CONFIG['GET_SHARE'] = '{:url("/".parse_name(request()->controller())."/getShare")}';
+</script>
+
+<form method="post" action="" class="form layui-form {:request()->action()}" onsubmit="return false;">
+  <input type="hidden" name="id" value="{:input('post.id')}">
+  <table>
+    <tr><td>{$Lang['field']['type']}</td><td>{$Type}</td><td class="button_td"><input type="button" value="{$Lang['button']['get']}" class="button"></td></tr>
+    <tr class="select"><td>{$Lang['field']['product_id']}</td><td><select name="product_id" lay-filter="product_id">{$Product}</select></td></tr>
+    <tr class="select"><td>{$Lang['field']['category_id']}</td><td><select name="category_id" lay-filter="category_id">{$Category}</select></td></tr>
+    <tr class="select"><td>{$Lang['field']['brand_id']}</td><td><select name="brand_id" lay-filter="brand_id">{$Brand}</select></td></tr>
+    <tr class="select"><td>{$Lang['field']['product_label_id']}</td><td><select name="product_label_id" lay-filter="product_label_id">{$ProductLabel}</select></td></tr>
+    <tr><td>{$Lang['field']['qrcode']}</td><td colspan="2" class="qrcode" style="height:269px;"></td></tr>
+    <tr><td>{$Lang['field']['url']}</td><td colspan="2" class="url"></td></tr>
+    <tr class="tip"><td></td><td colspan="2" style="padding:12px 0 0 0;"></td></tr>
+  </table>
+</form>

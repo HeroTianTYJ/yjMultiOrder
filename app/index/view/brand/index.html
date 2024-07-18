@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0">
+<meta name="keywords" content="{$One['keyword']}">
+<meta name="description" content="{$One['description']}">
+<title>{$One['title']}</title>
+<base href="{:config('url.web1')}">
+<link rel="shortcut icon" type="image/x-icon" href="static/index/images/favicon.ico">
+<script type="text/javascript" src="static/library/jquery/jquery.js?{:staticCache()}"></script>
+<script type="text/javascript" src="static/library/jquery/cookie.js?{:staticCache()}"></script>
+<script type="text/javascript" src="static/library/lazy_load.js?{:staticCache()}"></script>
+<script type="text/javascript" src="static/library/layer/layer.js?{:staticCache()}"></script>
+<script type="text/javascript" src="static/library/i_scroll.js?{:staticCache()}"></script>
+<script type="text/javascript" src="static/library/lay_ui/js/lay_ui.js?{:staticCache()}"></script>
+<script type="text/javascript" src="static/index/js/common.js?{:staticCache()}"></script>
+<script type="text/javascript" src="static/index/js/brand.js?{:staticCache()}"></script>
+{if condition="$One['share']"}
+<script type="text/javascript" src="//res.wx.qq.com/open/js/jweixin-1.6.0.js?{:staticCache()}"></script>
+<script type="text/javascript">wx.config({appId:'{$One["share"]["appid"]}',timestamp:'{$One["share"]["timestamp"]}',nonceStr:'{$One["share"]["nonce_str"]}',signature:'{$One["share"]["signature"]}',jsApiList:['updateAppMessageShareData','updateTimelineShareData','onMenuShareWeibo']});wx.ready(function(){let config={title:'{$One["share_title"]}'||'{$One["title"]}',desc:'{$One["share_desc"]}'||'{$One["description"]}',imgUrl:('{:config("system.qiniu_domain")}'||'{:config("url.web1")}{:config("dir.upload")}')+'{$One["share_pic"]}',link:'{$One["share"]["url"]}'};wx.updateAppMessageShareData(config);wx.updateTimelineShareData(config);wx.onMenuShareWeibo(config);});</script>
+{/if}
+<script type="text/javascript">
+let CONFIG = {
+  UPLOAD_DIR : '{:config("system.qiniu_domain")}' || '{:config("dir.upload")}',
+  MANAGER_ID : '{:input("get.uid")}',
+  QRCODE: '{:url("/qrcode/index")}'
+};
+</script>
+<link rel="stylesheet" type="text/css" href="static/library/lay_ui/css/lay_ui.css?{:staticCache()}">
+<link rel="stylesheet" type="text/css" href="static/library/layer/layer.css?{:staticCache()}">
+<link rel="stylesheet" type="text/css" href="static/index/css/basic.css?{:staticCache()}">
+<link rel="stylesheet" type="text/css" href="static/index/css/brand.css?{:staticCache()}">
+<style>
+body {
+    background: {$One['bg_color']};
+}
+.container {
+    max-width: {$One['width']}px;
+}
+.container .left {
+    width: {$One['left_width']}px;
+}
+.container .right {
+  margin-left: {$One['left_width']}px;
+}
+</style>
+</head>
+
+<body>
+<a name="top"></a>
+<header class="header"><div class="container"><h1>{$One['name']}</h1></div></header>
+
+<div class="container">
+  <div class="left">
+    <ul>
+      {foreach name="One['brand']" key="key" item="value"}
+      <li {if condition="input('id')==$value['id']"}class="active"{/if} index="{$key}"><a href="{:url('/'.parse_name(request()->controller()).'/index',['id'=>$value['id'],'code'=>session(config('system.session_key_index').'.distributor_code')])}" class="i_scroll" style="color:{$value['color']};">{$value['name']}</a></li>
+      {/foreach}
+    </ul>
+    <!--<div style="top:0;" id="bg" class="bg"></div>-->
+  </div>
+  
+  <div class="right">
+    {if condition="$One['item']"}
+    <ul class="list">
+      {foreach name="One['item']" key="key" item="value"}
+      <li>
+        <div>
+          {if condition="$value['tag']"}<p class="tag" style="background-position:0 -{$value['tag_bg']*30-30}px;">{$value['tag']}</p>{/if}
+          <p class="img"><a href="{:url('/item/index',['id'=>$value['id'],'code'=>session(config('system.session_key_index').'.distributor_code')])}" target="_blank">
+          {if condition="$value['preview']"}
+          <img src="static/index/images/grey.gif?{:staticCache()}" data-original="{if condition="config('system.qiniu_domain')"}{:config('system.qiniu_domain')}{else/}{:config('dir.upload')}{/if}{$value['preview']}?{:staticCache()}" alt="{$value['name']}" title="{$value['name']}" class="lazy" height="375">
+          {else/}
+          <img src="static/index/images/no_pic.png?{:staticCache()}" alt="{$value['name']}" title="{$value['name']}">
+          {/if}</a></p>
+          <p class="name"><a href="{:url('/item/index',['id'=>$value['id'],'code'=>session(config('system.session_key_index').'.distributor_code')])}" target="_blank">{$value['name']}</a></p>
+          <p class="price"><s>￥{$value['price1']}元</s> <strong>￥{$value['price2']}元</strong></p>
+        </div>
+      </li>
+      {/foreach}
+      
+      <p class="clear"></p>
+    </ul>
+    {if condition="$One['page']"}{$Page}{/if}
+    {else/}
+    <p class="nothing">此品牌下暂无商品</p>
+    {/if}
+    <footer class="footer"><p class="border"></p>{$One['copyright']}</footer>
+  </div>
+</div>
+
+{$One['nav_str']}
+
+<script type="text/javascript" src="static/index/js/visit.js?{:staticCache()}"></script>
+{$One['code']}
+{if condition="$One['code_type']==0"}{:config('system.code')}{/if}
+</body>
+</html>

@@ -1,0 +1,23 @@
+@charset "utf-8";
+.main ul.items li {
+    padding: 15px 15px 1px 15px;
+    border-bottom: 1px solid #E8E8E8;
+}
+.main ul.items li:hover,
+.main ul.items li.checked {
+    background: #F4FBFF;
+}
+.main ul.items li .item {
+    margin: 0 0 10px 0;
+}
+.main ul.items li .item span {
+    color: #999;
+    margin: 0 0 0 20px;
+}
+.main ul.items li .item span.name,
+.main ul.items li .item span:nth-child(1) {
+    margin: 0;
+}
+.main ul.items li .item i {
+    font-style: normal;
+}

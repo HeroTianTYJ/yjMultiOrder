@@ -1,0 +1,55 @@
+{extend name="../../common/view/public/base" /}
+
+{block name="title"}销商{/block}
+
+{block name="head"}<script type="text/javascript">
+CONFIG['PAGE_SIZE'] = {:config('app.page_size')};
+CONFIG['TOTAL'] = {$Total};
+CONFIG['LIST'] = window.location;
+CONFIG['ADD'] = '{:url("/".parse_name(request()->controller())."/add")}';
+CONFIG['ADD_DO'] = '{:url("/".parse_name(request()->controller())."/add",["action"=>"do"])}';
+</script>{/block}
+
+{block name="main"}
+<div class="tool">
+  <div class="row1">
+    <h2>结算记录</h2>
+  
+    <input type="hidden" name="ids">
+  
+    <div class="button">
+      <input type="button" value="申请提现" class="button add">
+    </div>
+  
+    <form method="get" action="" class="search layui-form" onsubmit="return false;">
+      <select name="type" lay-filter="type" lay-search><option value="-1">查看所有交易类型</option>{$Type}</select> <div class="search-text"><input type="text" name="keyword" value="{:input('get.keyword')}" class="text"><span class="iconfont icon-search"></span></div>
+    </form>
+  
+    <p class="clear"></p>
+  </div>
+</div>
+
+<div class="list">
+  {if condition="$Total>0"}
+  <table>
+    <thead><tr class="row1"><th style="width:80px;">交易类型</th><th style="width:120px;">交易金额</th><th style="width:160px;">交易时间</th></tr></thead>
+    <tbody class="items"></tbody>
+  </table>
+
+  <div class="pagination"><ul></ul></div>
+  {else/}
+  <p class="nothing"></p>
+  {/if}
+</div>
+{/block}
+
+{block name="right"}
+<div class="right">
+  <h3>温馨提示 <span class="iconfont icon-fold"></span></h3>
+  <ul>
+    <li>您当前已结算金额为：{if condition="$Sum['sum1']"}{$Sum['sum1']}{else/}0.00{/if}元，已提现金额为：{if condition="$Sum['sum2']"}{$Sum['sum2']}{else/}0.00{/if}元，可提现金额为：{if condition="$Sum['sum3']"}{$Sum['sum3']}{else/}0.00{/if}元。</li>
+  </ul>
+
+  <span class="iconfont icon-expand color"></span>
+</div>
+{/block}

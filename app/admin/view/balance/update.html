@@ -1,0 +1,7 @@
+<form method="post" action="" class="form layui-form {:request()->action()}" onsubmit="return false;">
+  <table>
+    <tr><td>分 销 商：</td><td>{$One['manager']}</td></tr>
+    <tr><td>交易类型：</td><td>{$One['type']}</td></tr>
+    <tr><td>交易金额：</td><td><input type="text" name="price" value="{$One['price']}" class="text"></td></tr>
+  </table>
+</form>

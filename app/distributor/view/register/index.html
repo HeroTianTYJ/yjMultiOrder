@@ -1,0 +1,33 @@
+{extend name="../../common/view/public/base2" /}
+
+{block name="title"}注册{/block}
+
+{block name="head"}<script type="text/javascript" src="static/library/jquery/jquery.js?{:staticCache()}"></script>
+<script type="text/javascript" src="static/library/valid_form.js?{:staticCache()}"></script>
+<script type="text/javascript" src="static/library/lay_ui/js/lay_ui.js?{:staticCache()}"></script>
+<script type="text/javascript" src="static/yj.admin.ui/js/common.js?{:staticCache()}"></script>
+<script type="text/javascript" src="static/distributor/js/{:parse_name(request()->controller())}.js?{:staticCache()}"></script>
+<link rel="stylesheet" type="text/css" href="static/library/lay_ui/css/lay_ui.css?{:staticCache()}">
+<link rel="stylesheet" type="text/css" href="static/distributor/css/{:parse_name(request()->controller())}.css?{:staticCache()}">{/block}
+
+{block name="main"}
+<h1><span class="iconfont icon-logo"></span>{:config('system.web_name')}-注册</h1>
+
+<form method="post" action="" class="form layui-form">
+  <table>
+    <tr><td colspan="2" class="title">账号信息</td></tr>
+    <tr><td>账　　号：</td><td><input type="text" name="name" class="text"></td></tr>
+    <tr><td>密　　码：</td><td><input type="password" name="pass" class="text"></td></tr>
+    <tr><td>重复密码：</td><td><input type="password" name="repass" class="text"></td></tr>
+    <tr><td>电子邮箱：</td><td><input type="text" name="email" class="text"></td></tr>
+    <tr class="tip"><td></td><td>多个邮箱请用“,”隔开，可接收订单提醒邮件</td></tr>
+    <tr><td colspan="2" class="title">收款信息</td></tr>
+    <tr><td colspan="2" style="text-align:center;">请如实填写，以便您能及时的收到结算佣金，一经填写，不可更改</td></tr>
+    <tr><td>开 户 行：</td><td><input type="text" name="bank" class="text"></td></tr>
+    <tr class="tip"><td></td><td>如：支付宝、中国银行北京东长安街支行（如填写的开户行为银行，请精确到具体开户网点）</td></tr>
+    <tr><td>开户人姓名：</td><td><input type="text" name="real_name" class="text"></td></tr>
+    <tr><td>开户账号：</td><td><input type="text" name="account" class="text"></td></tr>
+    <tr><td colspan="2" class="button-td"><input type="submit" value="立即注册" class="button"></td></tr>
+  </table>
+</form>
+{/block}

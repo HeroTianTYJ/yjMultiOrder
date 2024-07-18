@@ -1,0 +1,163 @@
+@charset "utf-8";
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+}
+body {
+    font-size: 16px;
+    font-family: "微软雅黑", serif;
+}
+::selection {
+    background: #BE0F22;
+    color: #fff;
+}
+a {
+    color: #000;
+    text-decoration: none;
+}
+a:hover {
+    color: #BE0F22;
+}
+a.anchor {
+    display: block;
+    position: relative;
+    top: -35px;
+}
+ul, ol, li {
+    list-style: none;
+}
+.clear {
+    clear: both;
+}
+
+form.page {
+    margin: 10px 0 0 0;
+}
+form.page p {
+    text-align: center;
+    font-size: 14px;
+    line-height: 30px;
+    color: #333;
+}
+form.page p a {
+    box-shadow: 0 1px 6px rgba(20, 3, 5, 0.2);
+    border-radius: 5px;
+    padding: 5px 10px;
+    background: #FFF;
+    color: #000;
+}
+form.page p a.active,
+form.page p a:hover {
+    background: #BE0F22;
+    color: #FFF;
+}
+form.page p a.disabled {
+    background: #FFF;
+    color: #666;
+}
+form.page.layui-form p .form-select {
+    width: 80px;
+}
+form.page.layui-form p .form-select dl dd {
+    text-align: left;
+    text-indent: 5px;
+}
+form.page.layui-form p .form-select dl dd.this {
+    background: #BE0F22;
+	color: #FFF;
+}
+form.page.layui-form p .form-select dl dd.this:after {
+    color: #FFF;
+}
+form.page.layui-form p .form-select dl.anim {
+    top: 31px;
+}
+form.page.layui-form p .form-select-up dl.anim {
+    top: auto;
+    bottom: 28px;
+}
+
+.footer {
+    text-align: center;
+    margin: 10px 0 0 0;
+    padding: 20px 0;
+    clear: both;
+    color: #000;
+}
+.footer p.border {
+    border-bottom: 1px solid #555;
+    width: 70%;
+    margin: 0 auto 10px auto;
+}
+.footer img {
+    max-width: 98%;
+}
+
+.nav {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    font-family: "宋体", serif;
+    z-index: 1000;
+}
+.nav ul {
+    height: 40px;
+    background: #BE0F22;
+    border: 5px solid #BE0F22;
+    box-shadow: 0 1px 6px rgba(20, 3, 5, 0.2);
+    border-radius: 8px;
+}
+.nav ul li {
+    width: 33.3%;
+    float: left;
+    text-align: center;
+}
+.nav ul li a {
+    display: block;
+    border-right: 1px dotted #f66;
+    color: #fff;
+}
+.nav ul li:nth-child(3) a {
+    border: none;
+}
+.nav ul li a strong {
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 45px;
+}
+.nav ul li a strong span {
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    margin: 0 10px 0 0;
+    position: relative;
+    top: 3px;
+}
+.nav ul li a strong span.cart {
+    background: url(../images/bottom_nav_icon.png) no-repeat 0;
+}
+.nav ul li a strong span.home {
+    background: url(../images/bottom_nav_icon.png) no-repeat -25px;
+}
+.nav ul li a strong span.list {
+    background: url(../images/bottom_nav_icon.png) no-repeat -50px;
+}
+.nav ul li a strong span.qq {
+    background: url(../images/bottom_nav_icon.png) no-repeat -75px;
+}
+.nav ul li a strong span.sms {
+    background: url(../images/bottom_nav_icon.png) no-repeat -100px;
+    width: 21px;
+}
+.nav ul li a strong span.tel {
+    background: url(../images/bottom_nav_icon.png) no-repeat -130px;
+}
+.nav ul li a strong span.wx {
+    background: url(../images/bottom_nav_icon.png) no-repeat -155px;
+}
+
+.layui-m-layercont img {
+    width: 100%;
+    height: 100%;
+}

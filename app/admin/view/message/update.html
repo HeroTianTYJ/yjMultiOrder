@@ -1,0 +1,9 @@
+<form method="post" action="" class="form layui-form {:request()->action()}" onsubmit="return false;">
+  <table>
+    <tr><td>姓　　名：</td><td><input type="text" name="name" value="{$One['name']}" class="text"></td></tr>
+    <tr><td>联系电话：</td><td><input type="text" name="tel" value="{$One['tel']}" class="text"></td></tr>
+    <tr><td>电子邮箱：</td><td><input type="text" name="email" value="{$One['email']}" class="text"></td></tr>
+    <tr><td>留言内容：</td><td><textarea name="content" class="textarea">{$One['content']}</textarea></td></tr>
+    <tr><td>回复内容：</td><td><textarea name="reply" class="textarea">{$One['reply']}</textarea></td></tr>
+  </table>
+</form>

@@ -1,0 +1,9 @@
+<form method="post" action="" class="form layui-form {:request()->action()}" onsubmit="return false;">
+  <table>
+    <tr><td>流动名称：</td><td><input type="text" name="name" value="{$One['name']}" class="text"></td></tr>
+    <tr><td>流动金额：</td><td><input type="text" name="price" value="{$One['price']}" class="text"></td></tr>
+    <tr><td>备　　注：</td><td><textarea name="note" class="textarea">{$One['note']}</textarea></td></tr>
+    <tr><td>时　　间：</td><td><input type="text" name="date" value="{$One['date']|dateFormat}" class="text"></td></tr>
+    <tr class="tip"><td></td><td>留空则为当前时间</td></tr>
+  </table>
+</form>

@@ -1,0 +1,25 @@
+{extend name="../../common/view/public/base" /}
+
+{block name="title"}订单{/block}
+{block name="head"}<link rel="stylesheet" type="text/css" href="static/admin/css/{:parse_name(request()->controller())}.css?{:staticCache()}">
+<script type="text/javascript" src="static/library/jquery/ui.js?{:staticCache()}"></script>
+<script type="text/javascript">
+CONFIG['RESTORE'] = '{:url("/".parse_name(request()->controller())."/restore")}';
+</script>{/block}
+
+{block name="main"}
+<div class="tool">
+  <div class="row1">
+    <h2>订单导出设置</h2>
+    <p class="clear"></p>
+  </div>
+</div>
+
+<form method="post" action="" class="form layui-form">
+  <table>
+    <tr><td>可用鼠标左键按住以下项目进行拖拽排序，勾选复选框表示将导出此项目，<a href="javascript:" class="restore">点击此处</a>恢复默认设置</td></tr>
+    <tr><td>{$OrderOutput}</td></tr>
+    <tr><td><input type="submit" value="确认修改" class="button"></td></tr>
+  </table>
+</form>
+{/block}

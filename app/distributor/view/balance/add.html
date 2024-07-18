@@ -1,0 +1,6 @@
+<form method="post" action="" class="form layui-form {:request()->action()}" onsubmit="return false;">
+  <table>
+    <tr><td>提现金额：</td><td><input type="text" name="price" class="text"></td></tr>
+    <tr class="tip"><td></td><td>您当前可提现金额为：{if condition="$Sum['sum3']"}{$Sum['sum3']}{else/}0.00{/if}元</td></tr>
+  </table>
+</form>

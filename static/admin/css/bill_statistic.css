@@ -1,0 +1,16 @@
+@charset "utf-8";
+.main .tool.advance form.search span.manager_id .form-select {
+    width: 181px;
+}
+
+.main .list table tr:last-child td,
+.main .list table tr:last-child:hover td {
+    background: #D3DCE3 !important;
+    font-weight: bold;
+    cursor: auto;
+}
+
+ul.tab {
+    margin: 0 0 0 16px;
+    float: left;
+}

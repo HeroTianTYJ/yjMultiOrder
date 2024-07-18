@@ -1,0 +1,44 @@
+{extend name="../../common/view/public/base" /}
+
+{block name="title"}留言{/block}
+
+{block name="head"}<link rel="stylesheet" type="text/css" href="static/admin/css/{:parse_name(request()->controller())}.css?{:staticCache()}">
+<script type="text/javascript">
+CONFIG['PAGE_SIZE'] = {:config('app.page_size')};
+CONFIG['TOTAL'] = {$Total};
+CONFIG['LIST'] = window.location;
+CONFIG['UPDATE'] = '{:url("/".parse_name(request()->controller())."/update")}';
+CONFIG['UPDATE_DO'] = '{:url("/".parse_name(request()->controller())."/update",["action"=>"do"])}';
+CONFIG['DELETE'] = '{:url("/".parse_name(request()->controller())."/delete")}';
+CONFIG['IS_VIEW'] = '{:url("/".parse_name(request()->controller())."/isView")}';
+</script>{/block}
+
+{block name="main"}
+<div class="tool">
+  <div class="row1">
+    <h2>留言管理</h2>
+  
+    <input type="hidden" name="ids">
+  
+    <div class="button">
+      {if condition="isPermission('delete')"}<input type="button" value="批量删除" class="button disabled must_select delete" disabled>{/if}
+    </div>
+  
+    <form method="get" action="" class="search layui-form" onsubmit="return false;">
+      <select name="message_board_id" lay-search lay-filter="message_board_id"><option value="0">查看所有留言板</option>{$MessageBoard}</select> <select name="is_view" lay-search lay-filter="is_view"><option value="-1">查看所有精选状态</option>{$IsView}</select> <div class="search-text"><input type="text" name="keyword" value="{:input('get.keyword')}" class="text"><span class="iconfont icon-search"></span></div>
+    </form>
+  
+    <p class="clear"></p>
+  </div>
+</div>
+
+<div class="list">
+  {if condition="$Total>0"}
+  <ul class="items"></ul>
+
+  <div class="pagination"><ul></ul></div>
+  {else/}
+  <p class="nothing"></p>
+  {/if}
+</div>
+{/block}

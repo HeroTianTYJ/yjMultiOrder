@@ -1,0 +1,43 @@
+<script type="text/javascript" src="static/library/jquery/color_picker.js?{:staticCache()}"></script>
+<script type="text/javascript" src="static/admin/js/{:parse_name(request()->controller())}_form.js?{:staticCache()}"></script>
+
+<form method="post" action="" class="form layui-form {:request()->action()}" onsubmit="return false;">
+  <table>
+    <tr><td>商品名称：</td><td><input type="text" name="name" value="{$One['name']}" class="text"></td></tr>
+    <tr><td>商品分类：</td><td><select name="product_sort_id" lay-search>{$ProductSort}</select></td></tr>
+    <tr><td>商品价格：</td><td><input type="text" name="price" value="{$One['price']}" class="text"></td></tr>
+    <tr><td>成 本 价：</td><td><input type="text" name="price2" value="{$One['price2']}" class="text"></td></tr>
+    <tr class="tip"><td></td><td>仅后台可见，如设置了成本价，用户下单后将记账到<a href="{:url('/bill/index')}" target="_blank">账单管理</a>模块，填0或留空则不记账</td></tr>
+    <tr><td>分销比例：</td><td><input type="text" name="commission" value="{$One['commission']}" class="text"></td></tr>
+    <tr class="tip"><td></td><td>%（0到100之间的任意数值，可精确到两位小数，填0或留空则不返佣）</td></tr>
+    <tr><td>商品颜色：</td><td><input type="text" name="color" value="{$One['color']}" class="text"></td></tr>
+    <tr class="tip"><td></td><td>留空则为黑色，颜色值可以为：表示颜色的英文单词，如red；16进制的颜色代码，如#FF0000；10进制的颜色代码，如rgb(255,0,0)。</td></tr>
+    <tr><td>管理邮箱：</td><td><input type="text" name="email" value="{$One['email']}" class="text"></td></tr>
+    <tr class="tip"><td></td><td>客户下单后，会统一发送订单提醒邮件到<a href="{:url('/system/index')}" target="_blank">系统设置</a>模块中的管理邮箱，除此之外，您还可在此处指定单独的管理邮箱；客户下单时，如果选择的是此商品，将会发送订单提醒邮件到单独的管理邮箱，多个邮箱请用“,”隔开，不得与<a href="{:url('/smtp/index')}" target="_blank">SMTP服务器</a>模块中的邮箱重复</td></tr>
+    <tr><td>销售属性：</td>
+      <td colspan="2">
+        <div class="attr_parent">
+          <p class="tip"><input type="button" value="添加" class="button add_attr"> 最多可以添加4组销售属性</p>
+          <div class="attr">
+            <p class="tip msg {if condition="$One['attr_str']==''"}none{/if}">为了保持下单页面的对齐效果，属性名建议不超过4个字；另外，不足4个字时，可用半角空格“ ”或全角空格“　”补齐</p>
+            <div class="append">{$One['attr_str']}</div>
+            <div class="own_price {if condition="$One['attr_str']==''"}none{/if}">
+            <p class="tip"><input type="button" value="设置独立价格" class="button add_own_price"> 请将销售属性设置完成后，再点击此按钮设置独立价格</p>
+            <p><input type="button" value="删除独立价格" class="button delete_own_price {if condition="$One['own_price_str']==''"}none{/if}"></p>
+            <p class="interval  {if condition="$One['own_price_str']==''"}none{/if}">价格区间：<input type="text" name="low_price" value="{$One['low_price']}" class="text"> ～ <input type="text" name="high_price" value="{$One['high_price']}" class="text"></p>
+            <div class="tree">{$One['own_price_str']}</div>
+          </div>
+        </div>
+        </div>
+      </td>
+    </tr>
+  </table>
+</form>
+
+<div class="attr_inner none">
+  <div>
+    <p><input type="text" name="attr_k" class="text attr_k" placeholder="属性名">：　　<input type="button" value="删除" class="button delete_attr"></p>
+    <p><input type="text" name="attr_v" class="text attr_v" placeholder="属性值"><input type="text" name="attr_v" class="text attr_v" placeholder="属性值"><input type="text" name="attr_v" class="text attr_v" placeholder="属性值"><input type="text" name="attr_v" class="text attr_v" placeholder="属性值"><input type="text" name="attr_v" class="text attr_v" placeholder="属性值"></p>
+    <p><input type="text" name="attr_v" class="text attr_v" placeholder="属性值"><input type="text" name="attr_v" class="text attr_v" placeholder="属性值"><input type="text" name="attr_v" class="text attr_v" placeholder="属性值"><input type="text" name="attr_v" class="text attr_v" placeholder="属性值"><input type="text" name="attr_v" class="text attr_v" placeholder="属性值"></p>
+  </div>
+</div>

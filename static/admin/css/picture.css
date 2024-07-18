@@ -1,0 +1,43 @@
+@charset "utf-8";
+.main .group p {
+    float: left;
+    line-height: 31px;
+}
+.main .group ul li {
+    float: left;
+    line-height: 31px;
+}
+.main .group ul li a {
+    color: #555658;
+    display: block;
+    padding: 0 10px;
+}
+.main .group ul li.active a {
+    background: #0059FF;
+    color: #FFF;
+    text-decoration: none;
+    border-radius: 13px;
+}
+.main .group input.button {
+    float: right;
+}
+.main ul.items {
+    margin: 14px;
+}
+.main ul.items li {
+    float: left;
+    margin: 10px;
+    border: 1px solid #E9E9E9;
+    width: calc(20% - 22px);
+    border-radius: 2px;
+    text-align: center;
+}
+.main ul.items li dl dt {
+    padding: 14px 5px;
+    word-break: break-all;
+}
+.main ul.items li dl dd img {
+    width: 100%;
+    height: 170px;
+    object-fit: contain;
+}

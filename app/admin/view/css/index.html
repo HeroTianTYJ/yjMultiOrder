@@ -1,0 +1,52 @@
+{extend name="../../common/view/public/base" /}
+
+{block name="title"}文件{/block}
+
+{block name="head"}<link rel="stylesheet" type="text/css" href="static/admin/css/{:parse_name(request()->controller())}.css?{:staticCache()}">
+<script type="text/javascript">
+CONFIG['PAGE_SIZE'] = {:config('app.page_size')};
+CONFIG['TOTAL'] = {$Total};
+CONFIG['LIST'] = window.location;
+CONFIG['UPDATE'] = '{:url("/".parse_name(request()->controller())."/update")}';
+CONFIG['UPDATE_DO'] = '{:url("/".parse_name(request()->controller())."/update",["action"=>"do"])}';
+</script>{/block}
+
+{block name="main"}
+<div class="tool">
+  <div class="row1">
+    <h2>CSS管理</h2>
+  
+    <form method="get" action="" class="search layui-form" onsubmit="return false;">
+      <select name="type" lay-search lay-filter="type"><option value="-1">查看所有文件类型</option>{$Type}</select> <div class="search-text"><input type="text" name="keyword" value="{:input('get.keyword')}" class="text"><span class="iconfont icon-search"></span></div>
+    </form>
+  
+    <p class="clear"></p>
+  </div>
+</div>
+
+<div class="list">
+  {if condition="$Total>0"}
+  <table class="{if condition="isPermission('update')"}right-fix{/if}">
+    <thead><tr class="row1"><th style="width:150px;">文件名称</th><th style="width:80px;">文件类型</th><th style="width:180px;">文件描述</th>{if condition="isPermission('update')"}<th style="width:60px;">操作</th>{/if}</tr></thead>
+    <tbody class="items"></tbody>
+  </table>
+
+  <div class="pagination"><ul></ul></div>
+  {else/}
+  <p class="nothing"></p>
+  {/if}
+</div>
+{/block}
+
+{block name="right"}
+<div class="right">
+  <h3>温馨提示 <span class="iconfont icon-fold"></span></h3>
+  <ul>
+    <li>1、此模块仅建议具备一定的前端开发经验的用户使用，如果您不具备前端开发知识，不建议对此模块进行改动；</li>
+    <li>2、在修改CSS文件之前，建议先将CSS代码复制到记事本进行本地备份；</li>
+    <li>3、由于此模块涉及到开发知识，故不属于售后服务范围内，如果因为您不懂开发知识而造成的系统无法使用，可酌情提供一两次的恢复服务，但不会频繁提供恢复服务。</li>
+  </ul>
+
+  <span class="iconfont icon-expand color"></span>
+</div>
+{/block}

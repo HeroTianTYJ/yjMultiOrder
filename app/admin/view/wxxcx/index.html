@@ -1,0 +1,64 @@
+{extend name="../../common/view/public/base" /}
+
+{block name="title"}页面{/block}
+
+{block name="head"}<link rel="stylesheet" type="text/css" href="static/admin/css/{:parse_name(request()->controller())}.css?{:staticCache()}">
+<script type="text/javascript">
+CONFIG['PAGE_SIZE'] = {:config('app.page_size')};
+CONFIG['TOTAL'] = {$Total};
+CONFIG['LIST'] = window.location;
+CONFIG['ADD'] = '{:url("/".parse_name(request()->controller())."/add")}';
+CONFIG['ADD_DO'] = '{:url("/".parse_name(request()->controller())."/add",["action"=>"do"])}';
+CONFIG['UPDATE'] = '{:url("/".parse_name(request()->controller())."/update")}';
+CONFIG['UPDATE_DO'] = '{:url("/".parse_name(request()->controller())."/update",["action"=>"do"])}';
+CONFIG['DELETE'] = '{:url("/".parse_name(request()->controller())."/delete")}';
+CONFIG['ZIP'] = '{:url("/".parse_name(request()->controller())."/zip")}';
+CONFIG['DOWNLOAD'] = '{:url("/".parse_name(request()->controller())."/download")}';
+CONFIG['DELETE_ZIP'] = '{:url("/".parse_name(request()->controller())."/deleteZip")}';
+</script>{/block}
+
+{block name="main"}
+<div class="tool">
+  <div class="row1">
+    <h2>微信小程序</h2>
+  
+    <input type="hidden" name="ids">
+  
+    <div class="button">
+      {if condition="isPermission('add')"}<input type="button" value="添加微信小程序" class="button add">{/if}
+      {if condition="isPermission('delete')"}<input type="button" value="批量删除" class="button disabled must_select delete" disabled>{/if}
+    </div>
+  
+    <form method="get" action="" class="search layui-form" onsubmit="return false;">
+      <select name="type" lay-search lay-filter="type"><option value="-1">查看所有首页类型</option>{$Type}</select>{if condition="input('get.type',-1)==0"} <select name="lists_id" lay-search lay-filter="lists_id"><option value="0">查看所有列表页</option>{$Lists}</select>{elseif condition="input('get.type')==1"/} <select name="item_id" lay-search lay-filter="item_id"><option value="0">查看所有商品页</option>{$Item}</select>{/if} <div class="search-text"><input type="text" name="keyword" value="{:input('get.keyword')}" class="text"><span class="iconfont icon-search"></span></div>
+    </form>
+  
+    <p class="clear"></p>
+  </div>
+</div>
+
+<div class="list">
+  {if condition="$Total>0"}
+  <table class="{if condition="isPermission('delete')"}left-fix{/if}{if condition="isPermission('update')||isPermission('delete')"} right-fix{/if}">
+    <thead><tr class="row1">{if condition="isPermission('delete')"}<th style="width:60px;"><div class="check-box"><label><input type="checkbox" class="all">全选</label></div></th>{/if}<th style="width:150px;">小程序名称</th><th style="width:90px;">首页类型</th><th style="width:170px;">页面名称</th>{if condition="isPermission('zip')||isPermission('download')||isPermission('deleteZip')"}<th style="width:110px;">打包</th>{/if}<th style="width:80px;">添加时间</th>{if condition="isPermission('update')||isPermission('delete')"}<th style="width:80px;">操作</th>{/if}</tr></thead>
+    <tbody class="items"></tbody>
+  </table>
+
+  <div class="pagination"><ul></ul></div>
+  {else/}
+  <p class="nothing"></p>
+  {/if}
+</div>
+{/block}
+
+{block name="right"}
+<div class="right">
+  <h3>温馨提示 <span class="iconfont icon-fold"></span></h3>
+  <ul>
+    <li>1、<a href="https://www.yjrj.cn/help/detail.html?id=34" target="_blank">微信小程序注册及发布流程</a>；</li>
+    <li>2、<a href="https://www.yjrj.cn/help/detail.html?id=35" target="_blank">微信小程序版本更新流程</a>。</li>
+  </ul>
+
+  <span class="iconfont icon-expand color"></span>
+</div>
+{/block}

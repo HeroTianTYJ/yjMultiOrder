@@ -1,0 +1,33 @@
+{extend name="../../common/view/public/base" /}
+
+{block name="title"}页面{/block}
+
+{block name="head"}<script type="text/javascript">
+CONFIG['PAGE_SIZE'] = {:config('app.page_size')};
+CONFIG['TOTAL'] = {$Total};
+CONFIG['LIST'] = window.location;
+CONFIG['UPDATE'] = '{:url("/".parse_name(request()->controller())."/update")}';
+CONFIG['UPDATE_DO'] = '{:url("/".parse_name(request()->controller())."/update",["action"=>"do"])}';
+</script>{/block}
+
+{block name="main"}
+<div class="tool">
+  <div class="row1">
+    <h2>品牌分类页</h2>
+    <p class="clear"></p>
+  </div>
+</div>
+
+<div class="list">
+  {if condition="$Total>0"}
+  <table class="right-fix">
+    <thead><tr class="row1"><th style="width:450px;">页面名称</th><th style="width:80px;">网页宽度</th><th style="width:80px;">左边栏宽度</th><th style="width:80px;">网页背景</th><th style="width:80px;">操作</th></tr></thead>
+    <tbody class="items"></tbody>
+  </table>
+
+  <div class="pagination"><ul></ul></div>
+  {else/}
+  <p class="nothing"></p>
+  {/if}
+</div>
+{/block}

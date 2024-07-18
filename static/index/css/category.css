@@ -1,0 +1,107 @@
+@charset "utf-8";
+.header {
+    text-align: center;
+    color: #fff;
+    line-height: 40px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
+}
+.header .container {
+    background: #000;
+    position: relative;
+    padding: 0;
+}
+.header .container h1 {
+    font-size: 1.2em;
+}
+
+.container {
+    margin: 0 auto;
+    padding-bottom: 50px;
+    background: #f9f9f9;
+}
+.container .left {
+    overflow: hidden;
+    background: #FFF;
+    float: left;
+    position: fixed;
+    top: 40px;
+    box-shadow: 0 1px 6px rgba(20, 3, 5, 0.2);
+}
+.container .left ul {
+    position: absolute;
+    width: 100%;
+}
+.container .left ul li {
+    text-align: center;
+    cursor: pointer;
+    height: 42px;
+    line-height: 15px;
+}
+.container .left ul li.active {
+    background: url(../images/category_bg.png) no-repeat;
+}
+.container .left ul li a {
+    padding: 10px 15px;
+    display: block;
+}
+.container .left ul li.active a {
+    color: #FFF !important;
+}
+/*.container .left .bg {
+    position: absolute;
+    background: url(../images/category_bg.png) no-repeat;
+    width: 100%;
+    height: 42px;
+    z-index: -100;
+}*/
+.container .right {
+    margin: 40px 0 0 0;
+    padding: 10px 10px 3px 15px;
+}
+.container .right .child {
+    float: left;
+    width: 100%;
+}
+.container .right .child p.name {
+    text-align: center;
+    font-weight: bold;
+    margin: 0 0 10px 0;
+}
+.container .right .child p.name span {
+    margin: 0 10px;
+}
+.container .right .child p.name img {
+    position: relative;
+    top: 7px;
+}
+.container .right .child ul {
+    margin: 5px 0 15px 0;
+    padding: 0 0 10px 0;
+}
+.container .right .child ul li {
+    width: 33.33%;
+    float: left;
+    padding: 5px;
+    box-sizing: border-box;
+}
+.container .right .child ul li dl dd img {
+    width: 100%;
+    box-shadow: 0 1px 6px rgba(20, 3, 5, 0.2);
+    border-radius: 10px;
+}
+.container .right .child ul li dl dt {
+    text-align: center;
+}
+.container .right .child ul li dl dt a {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.container .right p.nothing {
+    text-align: center;
+    padding: 20px 0;
+}

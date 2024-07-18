@@ -1,0 +1,10 @@
+<form method="post" action="" class="form layui-form {:request()->action()}" onsubmit="return false;">
+  <table>
+    <tr><td>分 销 商：</td><td>{$One['manager']['name']}</td></tr>
+    <tr><td>开 户 行：</td><td>{$One['manager']['bank']}</td></tr>
+    <tr><td>开户人姓名：</td><td>{$One['manager']['real_name']}</td></tr>
+    <tr><td>开户账号：</td><td>{$One['manager']['account']}</td></tr>
+    <tr><td>提现金额：</td><td><input type="text" name="price" value="{$One['price']}" class="input-text"></td></tr>
+    <tr><td>提现状态：</td><td>{$State}</td></tr>
+  </table>
+</form>

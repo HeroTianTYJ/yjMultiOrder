@@ -1,0 +1,52 @@
+{extend name="../../common/view/public/base" /}
+
+{block name="title"}数据{/block}
+
+{block name="head"}<link rel="stylesheet" type="text/css" href="static/distributor/css/{:parse_name(request()->controller())}.css?{:staticCache()}">
+<script type="text/javascript">
+CONFIG['PAGE_SIZE'] = {:config('app.page_size')};
+CONFIG['TOTAL'] = {$Total};
+CONFIG['LIST'] = window.location;
+</script>{/block}
+
+{block name="main"}
+<div class="tool advance">
+  <div class="row1">
+    <h2>访问统计（微信小程序）</h2>
+  
+    <div class="button">
+    </div>
+  
+    <p class="clear"></p>
+  </div>
+
+  <form method="get" action="" class="search layui-form" onsubmit="return false;">
+    <span>IP：<div class="search-text"><input type="text" name="keyword" value="{:input('get.keyword')}" class="text"><span class="iconfont icon-search"></span></div></span>
+    <span class="wxxcx_id">微信小程序：<select name="wxxcx_id" lay-search lay-filter="wxxcx_id"><option value="0">不限</option>{$Wxxcx}</select></span>
+    <span>页面类型：<select name="type" lay-search lay-filter="type"><option value="-1">不限</option>{$Type}</select></span>
+    {if condition="input('get.type',-1)==0"}
+    <span>列 表 页：<select name="lists_id" lay-search lay-filter="lists_id"><option value="0">不限</option>{$Lists}</select></span>
+    {elseif condition="input('get.type')==1"/}
+    <span>商 品 页：<select name="item_id" lay-search lay-filter="item_id"><option value="0">不限</option>{$Item}</select></span>
+    {elseif condition="input('get.type')==2"/}
+    <span>品牌分类：<select name="category_id" lay-search lay-filter="category_id"><option value="0">不限</option>{$Category}</select></span>
+    {elseif condition="input('get.type')==3"/}
+    <span>品　　牌：<select name="brand_id" lay-search lay-filter="brand_id"><option value="0">不限</option>{$Brand}</select></span>
+    {/if}
+    <span>访问场景：<select name="wxxcx_scene_id" lay-search lay-filter="wxxcx_scene_id"><option value="0">不限</option>{$WxxcxScene}</select></span>
+  </form>
+</div>
+
+<div class="list">
+  {if condition="$Total>0"}
+  <table>
+    <thead><tr class="row1"><th style="width:200px;">IP</th><th style="width:150px;">微信小程序</th><th style="width:90px;">页面类型</th><th style="width:250px;">页面名称</th><th style="width:170px;">访问场景</th><th style="width:100px;">当日访问次数</th><th style="width:90px;">第一次</th><th style="width:90px;">最后一次</th></tr></thead>
+    <tbody class="items"></tbody>
+  </table>
+
+  <div class="pagination"><ul></ul></div>
+  {else/}
+  <p class="nothing"></p>
+  {/if}
+</div>
+{/block}

@@ -1,0 +1,5 @@
+@charset "utf-8";
+.main .tool.advance form.search span.manager_id .form-select,
+.main .tool.advance form.search span.wxxcx_id .form-select {
+    width: 181px;
+}

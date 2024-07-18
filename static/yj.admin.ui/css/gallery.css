@@ -1,0 +1,103 @@
+@charset "utf-8";
+/*
+@Name：《昱杰后台UI框架》
+@Author：风形火影
+@Site：https://www.yjrj.cn
+*/
+.gallery {
+    height: 534px;
+}
+.gallery .dir {
+    margin: 15px 0;
+    padding: 0 0 0 20px;
+}
+.gallery .dir .form-select {
+    width: 100px;
+}
+.gallery .dir .form-select dl.layui-anim {
+    width: 125px;
+}
+.gallery ul.items li {
+    float: left;
+    margin: 10px;
+    border: 1px solid #E9E9E9;
+    width: calc(20% - 22px);
+    border-radius: 2px;
+    text-align: center;
+    cursor: pointer;
+}
+.gallery ul.items li.active {
+    border: 1px solid #5a98de;
+}
+.gallery ul.items li.nothing {
+    width: 100%;
+    font-weight: bold;
+    border: none;
+    font-size: 16px;
+    margin: 50px 0 0 0;
+    cursor: auto;
+}
+.gallery ul.items li dl dt {
+    padding: 14px 5px;
+    word-break: break-all;
+}
+.gallery ul.items li dl dd img {
+    height: 137px;
+    width: 100%;
+    object-fit: contain;
+}
+
+.gallery-insert .buttons {
+    display: inline-block;
+    position: relative;
+}
+.gallery-insert .buttons .local, .gallery-insert .buttons .choose {
+    display: none;
+    position: absolute;
+    left: 0;
+}
+.gallery-insert .buttons .insert, .gallery-insert .buttons .local, .gallery-insert .buttons .choose {
+    width: 110px;
+    text-align: center;
+    box-sizing: border-box;
+    line-height: 17px;
+}
+.gallery-insert .buttons .local {
+    top: 31px;
+    z-index: 100;
+}
+.gallery-insert .buttons .choose {
+    top: 62px;
+    z-index: 100;
+}
+.gallery-insert ul li {
+    margin: 10px 10px 0 0;
+    width: 104px;
+    height: 104px;
+    padding: 0;
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    float: left;
+    position: relative;
+}
+.gallery-insert ul li img {
+    width: 96px;
+    height: 96px;
+    margin: 4px;
+    object-fit: contain;
+}
+.gallery-insert ul.draggable li {
+    cursor: move;
+}
+.gallery-insert ul li a {
+    position: absolute;
+    bottom: 0;
+    display: block;
+    width: 100%;
+    text-align: center;
+    line-height: 20px;
+    background: #000;
+    color: #FFF;
+    opacity: 0.7;
+    filter: alpha(opacity=70);
+}

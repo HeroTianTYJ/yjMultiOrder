@@ -1,0 +1,47 @@
+{extend name="../../common/view/public/base" /}
+
+{block name="title"}数据{/block}
+
+{block name="head"}<script type="text/javascript">
+CONFIG['TYPE'] = 'directory';
+CONFIG['PAGE_SIZE'] = {:config('app.page_size')};
+CONFIG['TOTAL'] = {$Total};
+CONFIG['LIST'] = window.location;
+CONFIG['PICTURE'] = '{:url("/".parse_name(request()->controller())."/picture")}';
+CONFIG['DELETE'] = '{:url("/".parse_name(request()->controller())."/delete")}';
+CONFIG['CLEAR_QRCODE'] = '{:url("/".parse_name(request()->controller())."/clearQrcode")}';
+CONFIG['QINIU_SYNCHRONIZE'] = '{:url("/".parse_name(request()->controller())."/qiniuSynchronize")}';
+CONFIG['QRCODE_COUNT'] = {$QrcodeCount};
+</script>{/block}
+
+{block name="main"}
+<div class="tool">
+  <div class="row1">
+    <h2>图片管理</h2>
+  
+    <div class="button">
+      {if condition="isPermission('clearQrcode')"}<input type="button" value="清理小程序码" class="button clear_qrcode">{/if}
+      {if condition="isPermission('qiniuSynchronize')"}<input type="button" value="同步图片至七牛云" class="button qiniu_synchronize">{/if}
+    </div>
+  
+    <form method="get" action="" class="search layui-form" onsubmit="return false;">
+      <div class="search-text"><input type="text" name="keyword" value="{:input('get.keyword')}" class="text"><span class="iconfont icon-search"></span></div>
+    </form>
+  
+    <p class="clear"></p>
+  </div>
+</div>
+
+<div class="list">
+  {if condition="$Total>0"}
+  <table class="{if condition="isPermission('picture')||isPermission('delete')"}right-fix{/if}">
+    <thead><tr class="row1"><th style="width:220px;">目录名</th><th style="width:100px;">图片数量</th><th style="width:100px;">数据库丢失</th><th style="width:100px;">冗余</th>{if condition="isPermission('picture')||isPermission('delete')"}<th style="width:130px;">操作</th>{/if}</tr></thead>
+    <tbody class="items"></tbody>
+  </table>
+
+  <div class="pagination"><ul></ul></div>
+  {else/}
+  <p class="nothing"></p>
+  {/if}
+</div>
+{/block}

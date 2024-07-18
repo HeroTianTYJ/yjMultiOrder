@@ -1,0 +1,22 @@
+@charset "utf-8";
+.form table.column tr.tag_bg td label span {
+    background: url(../../index/images/tag_bg.png) no-repeat 0 0 / 60px 140px;
+    width: 60px;
+    height: 20px;
+    display: inline-block;
+}
+.form table.column tr td input.text2 {
+    width: 130px;
+}
+.form table.column tr td input.text3 {
+    width: 165px;
+}
+.form table.column tr td.column_sort ul li {
+    border: 1px solid #2489C5;
+    margin: 3px;
+    padding: 5px;
+    border-radius: 2px;
+    float: left;
+    line-height: 100%;
+    cursor: move;
+}

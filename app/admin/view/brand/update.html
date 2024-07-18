@@ -1,0 +1,23 @@
+<script type="text/javascript" src="static/library/jquery/color_picker.js?{:staticCache()}"></script>
+<script type="text/javascript" src="static/library/web_uploader/web_uploader_html5.js?{:staticCache()}"></script>
+<script type="text/javascript" src="static/yj.admin.ui/js/jquery/gallery.js?{:staticCache()}"></script>
+<script type="text/javascript" src="static/admin/js/{:parse_name(request()->controller())}_form.js?{:staticCache()}"></script>
+<link rel="stylesheet" type="text/css" href="static/library/web_uploader/web_uploader.css?{:staticCache()}">
+<link rel="stylesheet" type="text/css" href="static/yj.admin.ui/css/gallery.css?{:staticCache()}">
+<script type="text/javascript">
+CONFIG['UPLOAD_SERVER'] = '{:url("/common/upload")}';
+CONFIG['UPLOAD_DIR'] = '{:config("system.qiniu_domain")}' || '{:config("dir.upload")}';
+CONFIG['PICTURE_DIR'] = '{:url("/picture/pictureDir")}';
+CONFIG['PICTURE_LIST'] = '{:url("/picture/pictureList")}';
+</script>
+
+<form method="post" action="" class="form layui-form {:request()->action()}" onsubmit="return false;">
+  <table>
+    <tr><td>品牌名称：</td><td><input type="text" name="name" value="{$One['name']}" class="text"></td></tr>
+    <tr><td>品牌颜色：</td><td><input type="text" name="color" value="{$One['color']}" class="text"></td></tr>
+    <tr class="tip"><td></td><td>留空则为黑色，颜色值可以为：表示颜色的英文单词，如red；16进制的颜色代码，如#FF0000；10进制的颜色代码，如rgb(255,0,0)。</td></tr>
+    <tr><td>品牌logo：</td><td><input type="hidden" name="logo" value="{$One['logo']}"><div class="gallery-insert"><div class="buttons"><input type="button" value="插入图片" class="button insert"><span class="local logo_picker"></span><input type="button" value="从图片库选择" class="button choose logo_choose"></div><ul><li><img src="{if condition="config('system.qiniu_domain')"}{:config('system.qiniu_domain')}{else/}{:config('dir.upload')}{/if}{$One['logo']}" _src="{$One['logo']}" alt="{$One['logo']}"><a href="javascript:" class="delete">删除</a></li></ul></div></td></tr>
+    <tr><td>品牌分类：</td><td><select name="category_id" lay-search>{$Category}</select></td></tr>
+    <tr class="tip"><td></td><td>已过滤掉没有子分类的主分类</td></tr>
+  </table>
+</form>

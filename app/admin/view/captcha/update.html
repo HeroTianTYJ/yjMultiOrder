@@ -1,0 +1,19 @@
+<script type="text/javascript" src="static/admin/js/{:parse_name(request()->controller())}_form.js?{:staticCache()}"></script>
+
+<form method="post" action="" class="form layui-form {:request()->action()}" onsubmit="return false;">
+  <table>
+    <tr><td>验证码名称：</td><td><input type="text" name="name" value="{$One['name']}" class="text"></td></tr>
+    <tr><td>验证码类型：</td><td>{$Type}</td></tr>
+    <tr class="length"><td>验证码位数：</td><td><input type="text" name="length" value="{$One['length']}" class="text"></td></tr>
+    <tr><td>验证码字号：</td><td><input type="text" name="fontSize" value="{$One['fontSize']}" class="text"></td></tr>
+    <tr class="tip"><td></td><td>单位：px</td></tr>
+    <tr><td>验证码宽度：</td><td><input type="text" name="imageW" value="{$One['imageW']}" class="text"></td></tr>
+    <tr class="tip"><td></td><td>单位：px，填0或留空，将根据验证码位数和字体大小自适应</td></tr>
+    <tr><td>验证码高度：</td><td><input type="text" name="imageH" value="{$One['imageH']}" class="text"></td></tr>
+    <tr class="tip"><td></td><td>单位：px，填0或留空，将根据字体大小自适应</td></tr>
+    <tr><td>背景颜色：</td><td>R<input type="text" name="bgR" value="{$One['bg'][0]}" class="text text2"> G<input type="text" name="bgG" value="{$One['bg'][1]}" class="text text2"> B<input type="text" name="bgB" value="{$One['bg'][2]}" class="text text2"></td></tr>
+    <tr><td>背 景 图：</td><td>{$UseImgBg}</td></tr>
+    <tr><td>混淆曲线：</td><td>{$UseCurve}</td></tr>
+    <tr><td>杂　　点：</td><td>{$UseNoise}</td></tr>
+  </table>
+</form>

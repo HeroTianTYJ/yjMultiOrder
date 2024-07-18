@@ -1,0 +1,48 @@
+{extend name="../../common/view/public/base" /}
+
+{block name="title"}数据{/block}
+
+{block name="head"}<link rel="stylesheet" type="text/css" href="static/admin/css/{:parse_name(request()->controller())}.css?{:staticCache()}">
+<script type="text/javascript">
+CONFIG['TYPE'] = 'picture';
+CONFIG['PAGE_SIZE'] = {:config('app.page_size')};
+CONFIG['TOTAL'] = {$Total};
+CONFIG['LIST'] = window.location;
+CONFIG['DIR_UPLOAD'] = '{:config("dir.upload")}';
+CONFIG['CLEAR_PICTURE'] = '{:url("/".parse_name(request()->controller())."/clearPicture")}';
+CONFIG['ID'] = '{:input("get.id")}';
+CONFIG['PICTURE_TYPE'] = '{:input("get.type")}';
+</script>{/block}
+
+{block name="main"}
+<div class="tool">
+  <div class="row1">
+    <h3><a href="{:url('/'.parse_name(request()->controller()).'/index')}">图片管理</a> / <span>{:input('get.id')}目录</span></h3>
+
+    <form method="get" action="" class="search layui-form" onsubmit="return false;">
+      <div class="search-text"><input type="text" name="keyword" value="{:input('get.keyword')}" class="text"><span class="iconfont icon-search"></span></div>
+    </form>
+
+    <p class="clear"></p>
+  </div>
+</div>
+
+<div class="list">
+  <div class="group">
+    <p>分组：</p>
+    <ul>
+      {foreach name="$Type" key="key" item="value"}
+      <li {if condition="input('get.type',0)==$key"}class="active"{/if}><a href="{:url('/'.parse_name(request()->controller()).'/picture',['id'=>input('get.id'),'type'=>$key])}">{$value}</a></li>
+      {/foreach}
+    </ul>
+    {if condition="isPermission('clearPicture') && $Total>0 && input('get.type')==3"}<input type="button" value="清理" class="button secondary clear-picture">{/if}
+  </div>
+  <p class="clear"></p>
+  {if condition="$Total>0"}
+  <ul class="items"></ul>
+  <div class="pagination"><ul></ul></div>
+  {else/}
+  <p class="nothing"></p>
+  {/if}
+</div>
+{/block}

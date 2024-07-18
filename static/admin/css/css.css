@@ -1,0 +1,14 @@
+@charset "utf-8";
+.form {
+    height: 400px;
+}
+.form table {
+    width: 100%;
+}
+.form table tr td:nth-child(1) {
+    width: 100%;
+    text-align: left;
+}
+.form table tr td.code {
+    line-height: normal !important;
+}

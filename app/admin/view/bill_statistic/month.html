@@ -1,0 +1,59 @@
+{extend name="../../common/view/public/base" /}
+
+{block name="title"}账单{/block}
+
+{block name="head"}<script type="text/javascript" src="static/yj.admin.ui/js/jquery/number.js?{:staticCache()}"></script>
+<link rel="stylesheet" type="text/css" href="static/library/lay_ui/css/date.css?{:staticCache()}">
+<link rel="stylesheet" type="text/css" href="static/admin/css/{:parse_name(request()->controller())}.css?{:staticCache()}">
+<script type="text/javascript">
+CONFIG['TYPE'] = 'month';
+CONFIG['PAGE_SIZE'] = {:config('app.page_size')};
+CONFIG['TOTAL'] = {$Total};
+CONFIG['OUTPUT'] = '{:url("/".parse_name(request()->controller())."/output")}{$Param}';
+</script>{/block}
+
+{block name="main"}
+<div class="tool advance">
+  <div class="row1">
+    <h2>账单统计</h2>
+
+    <ul class="tab">
+      {if condition="isPermission('index')"}<li><a href="{:url('/'.parse_name(request()->controller()).'/index')}">概况</a></li>{/if}
+      {if condition="isPermission('day')"}<li><a href="{:url('/'.parse_name(request()->controller()).'/day')}">按天</a></li>{/if}
+      {if condition="isPermission('month')"}<li class="active"><a href="{:url('/'.parse_name(request()->controller()).'/month')}">按月</a></li>{/if}
+      {if condition="isPermission('year')"}<li><a href="{:url('/'.parse_name(request()->controller()).'/year')}">按年</a></li>{/if}
+    </ul>
+
+    <div class="button">
+      {if condition="isPermission('output')"}<input type="button" value="导出统计结果" class="button output" time="1">{/if}
+    </div>
+
+    <p class="clear"></p>
+  </div>
+  {include file="bill/search" /}
+</div>
+
+<div class="list">
+  {if condition="$Total>0"}
+  <table>
+    <thead><tr class="row1"><th style="width:120px;"><a href="{:url('/'.parse_name(request()->controller()).'/'.request()->action())}{$Param}&order=0">时间</a></th><th style="width:120px;"><a href="{:url('/'.parse_name(request()->controller()).'/'.request()->action())}{$Param}&order=1">收入笔数</a></th><th style="width:120px;"><a href="{:url('/'.parse_name(request()->controller()).'/'.request()->action())}{$Param}&order=2">收入金额</a></th><th style="width:120px;"><a href="{:url('/'.parse_name(request()->controller()).'/'.request()->action())}{$Param}&order=3">支出笔数</a></th><th style="width:120px;"><a href="{:url('/'.parse_name(request()->controller()).'/'.request()->action())}{$Param}&order=4">支出金额</a></th><th style="width:120px;"><a href="{:url('/'.parse_name(request()->controller()).'/'.request()->action())}{$Param}&order=5">合计笔数</a></th><th style="width:120px;"><a href="{:url('/'.parse_name(request()->controller()).'/'.request()->action())}{$Param}&order=6">合计金额</a></th></tr></thead>
+    <tbody class="items"></tbody>
+  </table>
+
+  <div class="pagination"><ul></ul></div>
+  {else/}
+  <p class="nothing"></p>
+  {/if}
+</div>
+{/block}
+
+{block name="right"}
+<div class="right">
+  <h3>温馨提示 <span class="iconfont icon-fold"></span></h3>
+  <ul>
+    <li>点击表头中的链接可进行排序操作。</li>
+  </ul>
+
+  <span class="iconfont icon-expand color"></span>
+</div>
+{/block}

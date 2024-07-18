@@ -1,0 +1,54 @@
+{extend name="../../common/view/public/base" /}
+
+{block name="title"}页面{/block}
+
+{block name="head"}<link rel="stylesheet" type="text/css" href="static/admin/css/{:parse_name(request()->controller())}.css?{:staticCache()}">
+<script type="text/javascript">
+CONFIG['PAGE_SIZE'] = {:config('app.page_size')};
+CONFIG['TOTAL'] = {$Total};
+CONFIG['LIST'] = window.location;
+CONFIG['ADD'] = '{:url("/".parse_name(request()->controller())."/add")}';
+CONFIG['ADD_DO'] = '{:url("/".parse_name(request()->controller())."/add",["action"=>"do"])}';
+CONFIG['UPDATE'] = '{:url("/".parse_name(request()->controller())."/update")}';
+CONFIG['UPDATE_DO'] = '{:url("/".parse_name(request()->controller())."/update",["action"=>"do"])}';
+CONFIG['DELETE'] = '{:url("/".parse_name(request()->controller())."/delete")}';
+CONFIG['IS_VIEW'] = '{:url("/".parse_name(request()->controller())."/isView")}';
+CONFIG['UPLOAD_DIR'] = '{:config("system.qiniu_domain")}' || '{:config("dir.upload")}';
+</script>{/block}
+
+{block name="main"}
+<div class="tool">
+  <div class="row1">
+    <h2>商品页</h2>
+  
+    <input type="hidden" name="ids">
+  
+    <div class="button">
+      {if condition="isPermission('add')"}<input type="button" value="添加商品页" class="button add">{/if}
+      {if condition="isPermission('delete')"}<input type="button" value="批量删除" class="button disabled must_select delete" disabled>{/if}
+    </div>
+  
+    <form method="get" action="" class="search layui-form" onsubmit="return false;">
+      <select name="brand_id" lay-search lay-filter="brand_id"><option value="0">查看所有品牌</option>{$Brand}</select> <select name="wxxcx_id" lay-search lay-filter="wxxcx_id"><option value="0">查看微信小程序推广访问量</option>{$Wxxcx}</select> <select name="manager_id" lay-search lay-filter="manager_id"><option value="0">查看分销商推广访问量</option>{$Manager}</select> <div class="search-text"><input type="text" name="keyword" value="{:input('get.keyword')}" class="text"><span class="iconfont icon-search"></span></div>
+    </form>
+  
+    <p class="clear"></p>
+  </div>
+</div>
+
+<div class="list">
+  {if condition="$Total>0"}
+  <table class="{if condition="isPermission('delete')"}left-fix{/if} right-fix">
+    <thead>
+      <tr class="row1">{if condition="isPermission('delete')"}<th style="width:60px;" rowspan="2"><div class="check-box"><label><input type="checkbox" class="all">全选</label></div></th>{/if}<th style="width:150px;" rowspan="2">商品名称</th><th style="width:150px;" rowspan="2">所属品牌</th><th style="width:60px;" rowspan="2">预览图</th><th style="width:80px;" rowspan="2">商品原价</th><th style="width:80px;" rowspan="2">促销价</th><th style="width:80px;" rowspan="2">销售量</th><th style="width:80px;" rowspan="2">倒计时区间</th>{if condition="isPermission('isView')"}<th style="width:80px;" rowspan="2">是否上架</th>{/if}<th colspan="2">访问量</th><th style="width:80px;" rowspan="2">添加时间</th><th style="width:120px;" rowspan="2">操作</th></tr>
+      <tr><th style="width:80px;">网页端</th><th style="width:80px;">小程序</th></tr>
+    </thead>
+    <tbody class="items"></tbody>
+  </table>
+
+  <div class="pagination"><ul></ul></div>
+  {else/}
+  <p class="nothing"></p>
+  {/if}
+</div>
+{/block}

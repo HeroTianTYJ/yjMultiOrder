@@ -1,0 +1,8 @@
+<script type="text/javascript" src="static/admin/js/{:parse_name(request()->controller())}_form.js?{:staticCache()}"></script>
+
+<form method="post" action="" class="form layui-form {:request()->action()}" onsubmit="return false;">
+  <table>
+    <tr><td><input type="button" value="开始同步" class="button synchronize"></td></tr>
+    <tr><td class="progress"></td></tr>
+  </table>
+</form>

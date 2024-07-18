@@ -1,0 +1,56 @@
+{extend name="../../common/view/public/base" /}
+
+{block name="title"}销商{/block}
+
+{block name="head"}<script type="text/javascript">
+CONFIG['PAGE_SIZE'] = {:config('app.page_size')};
+CONFIG['TOTAL'] = {$Total};
+CONFIG['LIST'] = window.location;
+CONFIG['UPDATE'] = '{:url("/".parse_name(request()->controller())."/update")}';
+CONFIG['UPDATE_DO'] = '{:url("/".parse_name(request()->controller())."/update",["action"=>"do"])}';
+CONFIG['DELETE'] = '{:url("/".parse_name(request()->controller())."/delete")}';
+</script>{/block}
+
+{block name="main"}
+<div class="tool">
+  <div class="row1">
+    <h2>结算管理</h2>
+  
+    <input type="hidden" name="ids">
+  
+    <div class="button">
+      {if condition="isPermission('delete')"}<input type="button" value="批量删除" class="button disabled must_select delete" disabled>{/if}
+    </div>
+  
+    <form method="get" action="" class="search layui-form" onsubmit="return false;">
+      <select name="manager_id" lay-filter="manager_id" lay-search><option value="0">查看所有分销商</option>{$Manager}</select> <select name="type" lay-filter="type" lay-search><option value="-1">查看所有交易类型</option>{$Type}</select>
+    </form>
+  
+    <p class="clear"></p>
+  </div>
+</div>
+
+<div class="list">
+  {if condition="$Total>0"}
+  <table class="{if condition="isPermission('delete')"}left-fix{/if}{if condition="isPermission('update')||isPermission('delete')"} right-fix{/if}">
+    <thead><tr class="row1">{if condition="isPermission('delete')"}<th style="width:60px;"><div class="check-box"><label><input type="checkbox" class="all">全选</label></div></th>{/if}<th style="width:230px;">分销商</th><th style="width:80px;">交易类型</th><th style="width:120px;">交易金额</th><th style="width:160px;">交易时间</th>{if condition="isPermission('update')||isPermission('delete')"}<th style="width:80px;">操作</th>{/if}</tr></thead>
+    <tbody class="items"></tbody>
+  </table>
+
+  <div class="pagination"><ul></ul></div>
+  {else/}
+  <p class="nothing"></p>
+  {/if}
+</div>
+{/block}
+
+{block name="right"}
+<div class="right">
+  <h3>温馨提示 <span class="iconfont icon-fold"></span></h3>
+  <ul>
+    <li>贵司已为分销商结算{if condition="$Sum['sum1']"}{$Sum['sum1']}{else/}0.00{/if}元，提现{if condition="$Sum['sum2']"}{$Sum['sum2']}{else/}0.00{/if}元，还有{if condition="$Sum['sum3']"}{$Sum['sum3']}{else/}0.00{/if}元未提现</li>
+  </ul>
+
+  <span class="iconfont icon-expand color"></span>
+</div>
+{/block}

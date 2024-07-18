@@ -1,0 +1,62 @@
+<script type="text/javascript" src="static/library/jquery/color_picker.js?{:staticCache()}"></script>
+<script type="text/javascript" src="static/library/web_uploader/web_uploader_html5.js?{:staticCache()}"></script>
+<script type="text/javascript" src="static/yj.admin.ui/js/jquery/gallery.js?{:staticCache()}"></script>
+<script type="text/javascript" src="static/admin/js/{:parse_name(request()->controller())}_form.js?{:staticCache()}"></script>
+<link rel="stylesheet" type="text/css" href="static/library/web_uploader/web_uploader.css?{:staticCache()}">
+<link rel="stylesheet" type="text/css" href="static/yj.admin.ui/css/gallery.css?{:staticCache()}">
+<script type="text/javascript">
+CONFIG['UPLOAD_SERVER'] = '{:url("/common/upload")}';
+CONFIG['UPLOAD_DIR'] = '{:config("system.qiniu_domain")}' || '{:config("dir.upload")}';
+CONFIG['PICTURE_DIR'] = '{:url("/picture/pictureDir")}';
+CONFIG['PICTURE_LIST'] = '{:url("/picture/pictureList")}';
+</script>
+
+<form method="post" action="" class="form layui-form {:request()->action()}" onsubmit="return false;">
+  <ul class="tab">
+    <li class="active"><a href="javascript:">页面设置</a></li>
+    <li><a href="javascript:">底部导航</a></li>
+    <li><a href="javascript:">微信分享</a></li>
+    <p class="clear"></p>
+  </ul>
+  <table class="column">
+    <tr><td colspan="2" class="tip left">以下表单，除“网页宽度”、“左边栏宽度”和“网页背景”之外，均支持变量{CategoryName}，表示当前一级分类名称</td></tr>
+    <tr><td style="width:84px;">页面名称：</td><td><input type="text" name="name" value="{$One['name']}" class="text"></td></tr>
+    <tr><td>网页标题：</td><td><input type="text" name="title" value="{$One['title']}" class="text"></td></tr>
+    <tr class="tip"><td></td><td>建议在80个字符之内</td></tr>
+    <tr><td>网页关键词：</td><td><textarea name="keyword" class="textarea">{$One['keyword']}</textarea></td></tr>
+    <tr class="tip"><td></td><td>建议在100个字符之内</td></tr>
+    <tr><td>网页描述：</td><td><textarea name="description" class="textarea">{$One['description']}</textarea></td></tr>
+    <tr class="tip"><td></td><td>建议在200个字符之内</td></tr>
+    <tr><td>网页宽度：</td><td><input type="text" name="width" value="{$One['width']}" class="text"></td></tr>
+    <tr class="tip"><td></td><td>填数字，单位：px</td></tr>
+    <tr><td>左边栏宽度：</td><td><input type="text" name="left_width" value="{$One['left_width']}" class="text"></td></tr>
+    <tr class="tip"><td></td><td>填数字，单位：px</td></tr>
+    <tr><td>网页背景：</td><td><input type="text" name="bg_color" value="{$One['bg_color']}" class="text"></td></tr>
+    <tr class="tip"><td></td><td>网页背景值可以为：表示颜色的英文单词，如red；16进制的颜色代码，如#FF0000；10进制的颜色代码，如rgb(255,0,0)。</td></tr>
+    <tr class="tip"><td></td><td>填0或留空表示不分页，当同一品牌下，商品数量较多时，建议使用分页</td></tr>
+    <tr><td>底部版权：</td><td><textarea name="copyright" class="textarea">{$One['copyright']}</textarea></td></tr>
+    <tr class="tip"><td></td><td><div class="gallery-insert"><div class="buttons"><input type="button" value="插入图片" class="button insert"><span class="local copyright_picker"></span><input type="button" value="从图片库选择" class="button choose copyright_choose"></div></div></td></tr>
+    <tr><td>第三方代码：</td><td>{$CodeType}</td></tr>
+    <tr class="tip"><td></td><td>全局代码请在<a href="{:url('/system/index')}" target="_blank">系统设置</a>模块中的前台设置中添加</td></tr>
+    <tr><td>独立代码：</td><td><textarea name="code" class="textarea">{$One['code']}</textarea></td></tr>
+    <tr class="tip"><td></td><td>此处可插入第三方代码，例如第三方网站统计的代码</td></tr>
+  </table>
+  <table class="column none">
+    <tr><td colspan="3" class="tip left">以下表单，其中“导航链接”支持变量{CategoryName}，表示当前一级分类名称</td></tr>
+    <tr><td>导航链接：</td><td><textarea name="nav" class="textarea">{$One['nav']}</textarea></td></tr>
+    <tr class="tip"><td></td><td>每一行代表一个导航，最多支持三个导航，点击下方的文字可以快速插入导航</td></tr>
+    <tr class="tip"><td></td><td class="nav"><a href="javascript:">QQ咨询</a> <a href="javascript:">电话咨询</a> <a href="javascript:">短信咨询</a> <a href="javascript:">返回顶部</a> <a href="javascript:">自定义本窗口链接</a> <a href="javascript:">自定义新窗口链接</a> <div class="gallery-insert" style="display:inline-block;"><div class="buttons"><input type="button" value="微信客服" title="当非微信小程序端访问前台页面时，点击底部导航中的“微信客服”将弹出微信二维码；当在微信小程序端点击时，将进入微信小程序客服会话" class="button insert"><span class="local qrcode_picker"></span><input type="button" value="从图片库选择" class="button choose qrcode_choose"></div></div></td></tr>
+    <tr><td>导航图标：</td><td><textarea name="icon" class="textarea">{$One['icon']}</textarea></td></tr>
+    <tr class="tip"><td></td><td>每一行代表一个图标，分别对应上方设置的导航，点击下方的文字可以快速插入内置图标，也可以插入自定义图标，建议尺寸：15×15</td></tr>
+    <tr class="tip"><td></td><td class="icon" style="height:80px;vertical-align:top;"><a href="javascript:">QQ咨询</a> <a href="javascript:">电话咨询</a> <a href="javascript:">短信咨询</a> <a href="javascript:">返回顶部</a> <a href="javascript:">在线订购</a> <a href="javascript:">商品列表</a> <a href="javascript:">微信客服</a> <div class="gallery-insert" style="display:inline-block;"><div class="buttons"><input type="button" value="自定义图标" class="button insert"><span class="local icon_picker"></span><input type="button" value="从图片库选择" class="button choose icon_choose"></div></div></td></tr>
+  </table>
+  <table class="column none">
+    <tr><td colspan="3" class="tip left">以下表单，除“预览图”之外，均支持变量{CategoryName}，表示当前一级分类名称</td></tr>
+    <tr><td>分享标题：</td><td><input type="text" name="share_title" value="{$One['share_title']}" class="text"></td></tr>
+    <tr class="tip"><td></td><td>如留空，分享时将采用“网页设置”中的“网页标题”</td></tr>
+    <tr><td>预 览 图：</td><td><input type="hidden" name="share_pic" value="{$One['share_pic']}"><div class="gallery-insert"><div class="buttons"><input type="button" value="插入图片" class="button insert"><span class="local share_pic_picker"></span><input type="button" value="从图片库选择" class="button choose share_pic_choose"></div><ul>{if condition="$One['share_pic']"}<li><img src="{if condition="config('system.qiniu_domain')"}{:config('system.qiniu_domain')}{else/}{:config('dir.upload')}{/if}{$One['share_pic']}" _src="{$One['share_pic']}" alt="{$One['share_pic']}"><a href="javascript:" class="delete">删除</a></li>{/if}</ul></div></td></tr>
+    <tr class="tip"><td></td><td>建议插入300×300或以上的正方形图片，如果不插入，预览图默认为品牌logo</td></tr>
+    <tr><td>分享摘要：</td><td><textarea name="share_desc" class="textarea">{$One['share_desc']}</textarea></td></tr>
+    <tr class="tip"><td></td><td>如留空，分享时将采用“网页设置”中的“网页描述”</td></tr>
+  </table>
+</form>

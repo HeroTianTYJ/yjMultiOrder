@@ -1,0 +1,79 @@
+{extend name="../../common/view/public/base" /}
+
+{block name="title"}订单{/block}
+
+{block name="head"}<script type="text/javascript" src="static/yj.admin.ui/js/jquery/number.js?{:staticCache()}"></script>
+<link rel="stylesheet" type="text/css" href="static/library/lay_ui/css/date.css?{:staticCache()}">
+<link rel="stylesheet" type="text/css" href="static/admin/css/{:parse_name(request()->controller())}.css?{:staticCache()}">
+<script type="text/javascript">
+CONFIG['PAGE_SIZE'] = {:config('app.page_size')};
+CONFIG['TOTAL'] = {$Total};
+CONFIG['LIST'] = window.location;
+{if condition="request()->controller()=='Order'"}
+CONFIG['ADD'] = '{:url("/".parse_name(request()->controller())."/add")}';
+CONFIG['ADD_DO'] = '{:url("/".parse_name(request()->controller())."/add",["action"=>"do"])}';
+CONFIG['EXPRESS'] = '{:url("/".parse_name(request()->controller())."/express")}';
+CONFIG['STATE'] = '{:url("/".parse_name(request()->controller())."/state")}';
+{else/}
+CONFIG['RECOVER'] = '{:url("/".parse_name(request()->controller())."/recover")}';
+{/if}
+CONFIG['OUTPUT'] = '{:url("/".parse_name(request()->controller())."/output")}';
+CONFIG['UPDATE'] = '{:url("/".parse_name(request()->controller())."/update")}';
+CONFIG['UPDATE_DO'] = '{:url("/".parse_name(request()->controller())."/update",["action"=>"do"])}';
+CONFIG['DELETE'] = '{:url("/".parse_name(request()->controller())."/delete")}';
+CONFIG['DETAIL'] = '{:url("/".parse_name(request()->controller())."/detail")}';
+</script>{/block}
+
+{block name="main"}
+<div class="tool advance">
+  <div class="row1">
+    <h2>{if condition="request()->controller()=='Order'"}订单管理{else/}订单回收站{/if}</h2>
+  
+    <input type="hidden" name="ids">
+  
+    <div class="button">
+      {if condition="request()->controller()=='Order'&&isPermission('add')"}<input type="button" value="添加订单" class="button add">{/if}
+      {if condition="request()->controller()=='OrderRecycle'&&isPermission('recover')"}<input type="button" value="批量还原" class="button disabled must_select recover" disabled>{/if}
+      {if condition="isPermission('delete')"}<input type="button" value="批量删除" class="button disabled must_select delete" disabled>{/if}
+      {if condition="request()->controller()=='Order'&&isPermission('state')"}<input type="button" value="修改订单状态" class="button disabled must_select state">{/if}
+      {if condition="request()->controller()=='Order'&&isPermission('express')"}<input type="button" value="修改快递单号" class="button disabled must_select express">{/if}
+      {if condition="isPermission('output')"}<input type="button" value="导出当前订单" class="button output1">
+      <input type="button" value="导出选定订单" class="button disabled must_select output2">
+      <div class="check-box"><label><input type="checkbox" name="siwu" value="1">四五打印格式</label></div>{/if}
+    </div>
+
+    <p class="clear"></p>
+  </div>
+
+  {$Search}
+</div>
+
+<div class="list">
+  {if condition="$Total>0"}
+  <table class="{if condition="isPermission('delete')"}left-fix{/if}{if condition="isPermission('detail')||isPermission('update')||isPermission('delete')"} right-fix{/if}">
+    <thead><tr class="row1">{if condition="isPermission('delete')"}<th style="width:60px;"><div class="check-box"><label><input type="checkbox" class="all">全选</label></div></th>{/if}{foreach name="Th" key="key" item="value"}<th style="width:{$value[0]}px;">{$value[1]}</th>{/foreach}{if condition="isPermission('detail')||isPermission('update')||isPermission('delete')"}<th style="width:110px;">操作</th>{/if}</tr></thead>
+    <tbody class="items"></tbody>
+  </table>
+
+  <div class="pagination"><ul></ul></div>
+  {else/}
+  <p class="nothing"></p>
+  {/if}
+</div>
+{/block}
+
+{block name="right"}
+{if condition="config('order_ui.reminder',1)==1"}
+<div class="right">
+  <h3>温馨提示 <span class="iconfont icon-fold"></span></h3>
+  <ul>
+    <li>1、列表中的详细地址默认显示25个字符（1个汉字表示2个字符），鼠标悬停在地址上，将显示地址的全部内容；</li>
+    <li>2、点击快递单号可查询物流进度；</li>
+    <li>3、如勾选了“四五打印格式”，导出的订单可以导入到“四五打印助手”软件，用来打印快递单；</li>
+    <li>4、“四五打印助手”软件下载地址：<a href="https://www.yjrj.cn/11" target="_blank">https://www.yjrj.cn/11</a>，使用教程：<a href="https://www.yjrj.cn/12" target="_blank">https://www.yjrj.cn/12</a>。</li>
+  </ul>
+
+  <span class="iconfont icon-expand color"></span>
+</div>
+{/if}
+{/block}

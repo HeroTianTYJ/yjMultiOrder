@@ -1,0 +1,39 @@
+@charset "utf-8";
+.form table tr td .attr_parent p {
+    margin: 0 0 5px 0;
+}
+.form table tr td .attr input.text {
+    width: 116px;
+    margin: 0 2px 2px 0;
+}
+.form table tr td .attr .tree1 {
+    border-bottom: 1px dashed green;
+    border-left: 1px dashed green;
+    margin: 0 0 5px 0;
+    padding: 0 0 5px 10px;
+}
+.form table tr td .attr .tree1 .tree2 {
+    border-bottom: 1px dashed blue;
+    border-left: 1px dashed blue;
+    margin: 0 0 5px 0;
+    padding: 0 0 5px 10px;
+}
+.form table tr td .attr .tree1 .tree2 .tree3 {
+    border-bottom: 1px dashed red;
+    border-left: 1px dashed red;
+    margin: 0 0 5px 0;
+    padding: 0 0 5px 10px;
+}
+.form table tr td .attr .tree1 .tree2 .tree3 .tree4 {
+    border-bottom: 1px dashed brown;
+    border-left: 1px dashed brown;
+    margin: 0 0 5px 0;
+    padding: 0 0 5px 10px;
+}
+
+.main .tool.advance form.search label.wxxcx_id .form-select {
+    width: 139px;
+}
+.main .tool.advance form.search label.manager_id .form-select {
+    width: 167px;
+}

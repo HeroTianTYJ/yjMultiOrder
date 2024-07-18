@@ -1,0 +1,18 @@
+<script type="text/javascript" src="static/admin/js/{:parse_name(request()->controller())}_form.js?{:staticCache()}"></script>
+
+<form method="post" action="" class="form layui-form {:request()->action()}" onsubmit="return false;">
+  <table>
+    <tr><td>账单名称：</td><td><input type="text" name="name" value="{$One['name']}" class="text"></td></tr>
+    <tr><td>账单分类：</td><td><select name="bill_sort_id" lay-search>{$BillSort}</select></td></tr>
+    <tr><td>收入单价：</td><td><input type="text" name="in_price" value="{if condition="$One['in_price']!=0"}{$One['in_price']}{/if}" class="text price">元　数量：<input type="text" name="in_count" value="{if condition="$One['in_count']!=0"}{$One['in_count']}{/if}" class="text price"></td></tr>
+    <tr><td>成本/退款：</td><td><input type="text" name="in_price_out" value="{if condition="$One['in_price_out']!=0"}{$One['in_price_out']}{/if}" class="text price">元　数量：<input type="text" name="in_count_out" value="{if condition="$One['in_count_out']!=0"}{$One['in_count_out']}{/if}" class="text price"></td></tr>
+    <tr class="tip"><td></td><td>以上四个文本框建议在统计收入时使用</td></tr>
+    <tr><td>支出单价：</td><td> <input type="text" name="out_price" value="{if condition="$One['out_price']!=0"}{$One['out_price']}{/if}" class="text price">元　数量：<input type="text" name="out_count" value="{if condition="$One['out_count']!=0"}{$One['out_count']}{/if}" class="text price"></td></tr>
+    <tr><td>退款单价：</td><td><input type="text" name="out_price_in" value="{if condition="$One['out_price_in']!=0"}{$One['out_price_in']}{/if}" class="text price">元　数量：<input type="text" name="out_count_in" value="{if condition="$One['out_count_in']!=0"}{$One['out_count_in']}{/if}" class="text price"></td></tr>
+    <tr class="tip"><td></td><td>以上四个文本框建议在统计支出时使用</td></tr>
+    <tr><td>备　　注：</td><td><textarea name="note" class="textarea">{$One['note']}</textarea></td></tr>
+    <tr><td>时　　间：</td><td><input type="text" name="date" value="{$One['date']|dateFormat}" class="text"></td></tr>
+    <tr class="tip"><td></td><td>留空则为当前时间</td></tr>
+    <tr class="tip"><td></td><td>说明：提交时，当单价为大于0的数字，且数量为空时，数量默认为1；当单价为空，数量不为空时，将自动清空数量。</td></tr>
+  </table>
+</form>

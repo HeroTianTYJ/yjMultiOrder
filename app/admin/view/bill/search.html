@@ -1,0 +1,20 @@
+<form method="get" action="" class="search layui-form">
+  <span>关 键 词：<input type="text" name="keyword" value="{:input('get.keyword')}" class="text"></span>
+  <span class="manager_id">所属管理员：<select name="manager_id" lay-filter="manager_id" lay-search><option value="0">不限</option>{$Manager}</select></span>
+  <span>账单分类：<select name="bill_sort_id" lay-filter="bill_sort_id" lay-search><option value="0">不限</option>{$BillSort}</select></span>
+  <span>收入单价：<div name="in_price1" value="{:input('get.in_price1')}" class="number"></div> ～ <div name="in_price2" value="{:input('get.in_price2')}" class="number"></div></span>
+  <span>收入数量：<div name="in_count1" value="{:input('get.in_count1')}" class="number"></div> ～ <div name="in_count2" value="{:input('get.in_count2')}" class="number"></div></span>
+  <span>成本单价：<div name="in_price_out1" value="{:input('get.in_price_out1')}" class="number"></div> ～ <div name="in_price_out2" value="{:input('get.in_price_out2')}" class="number"></div></span>
+  <span>成本数量：<div name="in_count_out1" value="{:input('get.in_count_out1')}" class="number"></div> ～ <div name="in_count_out2" value="{:input('get.in_count_out2')}" class="number"></div></span>
+  <span>支出单价：<div name="out_price1" value="{:input('get.out_price1')}" class="number"></div> ～ <div name="out_price2" value="{:input('get.out_price2')}" class="number"></div></span>
+  <span>支出数量：<div name="out_count1" value="{:input('get.out_count1')}" class="number"></div> ～ <div name="out_count2" value="{:input('get.out_count2')}" class="number"></div></span>
+  <span>退款单价：<div name="out_price_in1" value="{:input('get.out_price_in1')}" class="number"></div> ～ <div name="out_price_in2" value="{:input('get.out_price_in2')}" class="number"></div></span>
+  <span>退款数量：<div name="out_count_in1" value="{:input('get.out_count_in1')}" class="number"></div> ～ <div name="out_count_in2" value="{:input('get.out_count_in2')}" class="number"></div></span>
+  <span>合　　计：<div name="add1" value="{:input('get.add1')}" class="number"></div> ～ <div name="add2" value="{:input('get.add2')}" class="number"></div></span>
+  <span>当前收入：<div name="all_in1" value="{:input('get.all_in1')}" class="number"></div> ～ <div name="all_in2" value="{:input('get.all_in2')}" class="number"></div></span>
+  <span>当前支出：<div name="all_out1" value="{:input('get.all_out1')}" class="number"></div> ～ <div name="all_out2" value="{:input('get.all_out2')}" class="number"></div></span>
+  <span>当前余额：<div name="all_add1" value="{:input('get.all_add1')}" class="number"></div> ～ <div name="all_add2" value="{:input('get.all_add2')}" class="number"></div></span>
+  <span>时　　间：<input name="date1" value="{:input('get.date1')}" class="text date"> ～ <input name="date2" value="{:input('get.date2')}" class="text date"></span>
+  <input type="submit" value="查询" class="button third">
+  <p class="clear"></p>
+</form>

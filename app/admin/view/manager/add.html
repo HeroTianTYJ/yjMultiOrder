@@ -1,0 +1,26 @@
+<script type="text/javascript" src="static/admin/js/{:parse_name(request()->controller())}_form.js?{:staticCache()}"></script>
+
+<form method="post" action="" class="form layui-form {:request()->action()}" onsubmit="return false;">
+  <table>
+    <tr><td>账　　号：</td><td><input type="text" name="name" class="text"></td></tr>
+    <tr><td>密　　码：</td><td><input type="password" name="pass" class="text"></td></tr>
+    <tr><td>重复密码：</td><td><input type="password" name="repass" class="text"></td></tr>
+    <tr><td>电子邮箱：</td><td><input type="text" name="email" class="text"></td></tr>
+    <tr class="tip"><td></td><td>多个邮箱请用“,”隔开，可接收订单提醒邮件</td></tr>
+    <tr><td>身　　份：</td><td>{$Level}</td></tr>
+    <tr><td>是否激活：</td><td>{$IsActivation}</td></tr>
+    <tbody class="permit">
+    <tr><td>权 限 组：</td><td><select name="permit_group_id" lay-search>{$PermitGroup}</select></td></tr>
+    <tr><td>订单权限：</td><td>{$OrderPermit}</td></tr>
+    <tr><td>账单权限：</td><td>{$BillPermit}</td></tr>
+    <tr class="tip"><td></td><td>设置对普通管理员订单和账单开放的权限，为普通管理员分配了订单和账单模块的管理权限后，此设置才可生效（超级管理员不受限）</td></tr>
+    </tbody>
+    <tbody class="payment">
+    <tr><td>收款信息　</td></tr>
+    <tr><td>开 户 行：</td><td><input type="text" name="bank" class="text"></td></tr>
+    <tr class="tip"><td></td><td>如：支付宝、中国银行北京东长安街支行（如填写的开户行为银行，请精确到具体开户网点）</td></tr>
+    <tr><td>开户人姓名：</td><td><input type="text" name="real_name" class="text"></td></tr>
+    <tr><td>开户账号：</td><td><input type="text" name="account" class="text"></td></tr>
+    </tbody>
+  </table>
+</form>

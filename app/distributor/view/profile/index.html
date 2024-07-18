@@ -1,0 +1,37 @@
+{extend name="../../common/view/public/base" /}
+
+{block name="title"}个人中心{/block}
+
+{block name="main"}
+<div class="tool">
+  <div class="row1">
+    <h2>个人资料</h2>
+    <p class="clear"></p>
+  </div>
+</div>
+
+<form method="post" action="" class="form layui-form">
+  <table>
+    <tr><td>用 户 名：</td><td>{$One['name']}</td></tr>
+    <tr><td>旧 密 码：</td><td><input type="password" name="old_pass" class="text"></td></tr>
+    <tr><td>新 密 码：</td><td><input type="password" name="pass" class="text"></td><td>留空则不修改</td></tr>
+    <tr><td>重复密码：</td><td><input type="password" name="repass" class="text"></td></tr>
+    <tr><td>电子邮箱：</td><td><input type="text" name="email" value="{$One['email']}" class="text"></td><td>多个邮箱请用“,”隔开，可接收订单提醒邮件</td></tr>
+    <tr><td>微信绑定：</td><td><span class="wechat_yes {if condition="!$One['wechat_open_id']&&!$One['wechat_union_id']"}none{/if}">是 | <div class="check-box"><label><input type="checkbox" name="wechat_open_id" value="1">解绑</label></div></span><span class="wechat_no {if condition="$One['wechat_open_id']||$One['wechat_union_id']"}none{/if}">否 | <a href="javascript:" onclick="window.open('{:url('/'.parse_name(request()->controller()).'/wechat')}','wechat')">绑定</a></span></td></tr>
+    <tr><td>QQ绑定：</td><td><span class="qq_yes {if condition="!$One['qq_open_id']"}none{/if}">是 | <div class="check-box"><label><input type="checkbox" name="qq_open_id" value="1">解绑</label></div></span><span class="qq_no {if condition="$One['qq_open_id']"}none{/if}">否 | <a href="javascript:" onclick="window.open('{:url('/'.parse_name(request()->controller()).'/qq')}','qq')">绑定</a></span></td></tr>
+    <tr><td>注册时间：</td><td>{$One['date']|dateFormat}</td></tr>
+    {if condition="$One['bank']&&$One['real_name']&&$One['account']"}
+    <tr><td colspan="2" class="left">收款信息（如需修改请联系客服）</td></tr>
+    <tr><td>开 户 行：</td><td>{$One['bank']}</td></tr>
+    <tr><td>开户人姓名：</td><td>{$One['real_name']}</td></tr>
+    <tr><td>开户账号：</td><td>{$One['account']}</td></tr>
+    {else/}
+    <tr><td colspan="3" class="left">收款信息（您的收款信息尚未完善，请及时进行完善，以便您能及时的收到结算佣金。请如实填写，一经填写，不可更改。）</td></tr>
+    <tr><td>开 户 行：</td><td><input type="text" name="bank" value="{$One['bank']}" class="text"></td><td>如：支付宝、中国银行北京东长安街支行（如填写的开户行为银行，请精确到具体开户网点）</td><td></td></tr>
+    <tr><td>开户人姓名：</td><td><input type="text" name="real_name" value="{$One['real_name']}" class="text"></td><td></td></tr>
+    <tr><td>开户账号：</td><td><input type="text" name="account" value="{$One['account']}" class="text"></td><td></td></tr>
+    {/if}
+    <tr><td colspan="2" class="left"><input type="submit" value="确认修改" class="button"></td></tr>
+  </table>
+</form>
+{/block}

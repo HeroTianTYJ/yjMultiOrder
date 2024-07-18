@@ -1,0 +1,16 @@
+<table class="detail">
+  <tr><td>订 单 号：</td><td>{$One['order_id']}</td></tr>
+  <tr><td>下单模板：</td><td>{$One['template']}</td></tr>
+  <tr><td>订购商品：</td><td>{$One['product']}</td></tr>
+  <tr><td>商品属性：</td><td>{$One['attr']}</td></tr>
+  <tr><td>成交单价：</td><td>{$One['price']}元</td></tr>
+  <tr><td>订购数量：</td><td>{$One['count']}</td></tr>
+  <tr><td>成交总价：</td><td>{$One['total']}元</td></tr>
+  <tr><td>分销佣金：</td><td>{if condition="$One['commission']"}{$One['commission']}元{else/}-{/if}</td></tr>
+  <tr><td>分销结算：</td><td>{if condition="$One['commission']"}{$One['is_commission']}{else/}-{/if}</td></tr>
+  <tr><td>支付方式：</td><td>{:config('payment.'.$One['payment_id'])}</td></tr>
+  <tr><td>下单时间：</td><td>{$One['date']|dateFormat}</td></tr>
+  <tr><td>订单状态：</td><td>{$One['order_state']}</td></tr>
+  <tr><td>快递公司：</td><td>{$One['express_name']}</td></tr>
+  <tr><td>快递单号：</td><td>{$One['express_number']}{if condition="$One['express_name']&&$One['express_number']"}，<a href="https://www.kuaidi100.com/chaxun?com={$One['express_code']}&nu={$One['express_number']}" target="_blank">查询进度</a>{/if}</td></tr>
+</table>

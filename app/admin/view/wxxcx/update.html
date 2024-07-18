@@ -1,0 +1,25 @@
+<script type="text/javascript" src="static/admin/js/{:parse_name(request()->controller())}_form.js?{:staticCache()}"></script>
+
+<form method="post" action="" class="form layui-form {:request()->action()}" onsubmit="return false;">
+  <table>
+    <tr><td>小程序名称：</td><td><input type="text" name="name" value="{$One['name']}" class="text"></td></tr>
+    <tr><td>首页类型：</td><td>{$Type}</td></tr>
+    <tr class="lists"><td>列 表 页：</td><td><select name="lists_id" lay-search>{$Lists}</select></td></tr>
+    <tr class="item"><td>商 品 页：</td><td><select name="item_id" lay-search>{$Item}</select></td></tr>
+    <tr><td>交互密钥：</td><td><input type="text" name="submit_key" value="{$One['submit_key']}" class="text" readonly></td></tr>
+    <tr class="tip"><td></td><td>微信小程序端和系统交互数据所使用的密钥，一旦发现泄露，请立即<a href="javascript:" class="submit_key">点击此处</a>更换并重新打包上传微信小程序</td></tr>>
+    <tr><td colspan="3" class="tip left">1、完成以上设置项，已经可以进行打包上传微信小程序；</td></tr>
+    <tr><td colspan="3" class="tip left">2、如果您需要让您的分销商能够获取到微信小程序推广码，您需完善以下设置项中的前两项；</td></tr>
+    <tr><td colspan="3" class="tip left">3、如果您需要让您的微信小程序支持微信支付，则以下6个设置项均需完善。</td></tr>
+    <tr><td>AppID：</td><td><input type="text" name="app_id" value="{$One['app_id']}" class="text"></td></tr>
+    <tr><td>AppSecret：</td><td><input type="text" name="app_secret" value="{$One['app_secret']}" class="text"></td></tr>
+    <tr class="tip"><td></td><td>以上两项请登录微信小程序管理平台，依次点击“开发管理 - 开发设置”进行获取</td></tr>
+    <tr><td>商 户 号：</td><td><input type="text" name="pay_mch_id" value="{$One['pay_mch_id']}" class="text"></td></tr>
+    <tr class="tip"><td></td><td>登录微信小程序管理平台，依次点击“微信支付 - 商户号管理”，即可获取到商户号</td></tr>
+    <tr><td>商户密钥：</td><td><input type="text" name="pay_key" value="{$One['pay_key']}" class="text"></td></tr>
+    <tr class="tip"><td></td><td><a href="https://www.yjrj.cn/16" target="_blank">点击此处</a>设置商户的APIv3密钥</td></tr>
+    <tr><td>证书序列号：</td><td><input type="text" name="pay_cert_serial_number" value="{$One['pay_cert_serial_number']}" class="text"></td></tr>
+    <tr><td>证书私钥：</td><td><textarea name="pay_cert_private_key" class="textarea">{$One['pay_cert_private_key']}</textarea></td></tr>
+    <tr class="tip"><td></td><td><a href="https://www.yjrj.cn/17" target="_blank">点击此处</a>进入到微信商户平台的API证书管理页面，点击“申请新证书”按钮，完成证书申请，即可获取到证书序列号及证书私钥</td></tr>
+  </table>
+</form>

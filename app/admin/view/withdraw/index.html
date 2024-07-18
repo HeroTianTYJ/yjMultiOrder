@@ -1,0 +1,46 @@
+{extend name="../../common/view/public/base" /}
+
+{block name="title"}销商{/block}
+
+{block name="head"}<link rel="stylesheet" type="text/css" href="static/admin/css/{:parse_name(request()->controller())}.css?{:staticCache()}">
+<script type="text/javascript">
+CONFIG['PAGE_SIZE'] = {:config('app.page_size')};
+CONFIG['TOTAL'] = {$Total};
+CONFIG['LIST'] = window.location;
+CONFIG['UPDATE'] = '{:url("/".parse_name(request()->controller())."/update")}';
+CONFIG['UPDATE_DO'] = '{:url("/".parse_name(request()->controller())."/update",["action"=>"do"])}';
+CONFIG['DELETE'] = '{:url("/".parse_name(request()->controller())."/delete")}';
+</script>{/block}
+
+{block name="main"}
+<div class="tool">
+  <div class="row1">
+    <h2>提现管理</h2>
+  
+    <input type="hidden" name="ids">
+  
+    <div class="button">
+      {if condition="isPermission('delete')"}<input type="button" value="批量删除" class="button disabled must_select delete" disabled>{/if}
+    </div>
+  
+    <form method="get" action="" class="search layui-form" onsubmit="return false;">
+      <select name="manager_id" lay-filter="manager_id" lay-search><option value="0">查看所有分销商</option>{$Manager}</select> <select name="state" lay-filter="state" lay-search><option value="-1">查看所有提现状态</option>{$State}</select> <div class="search-text"><input type="text" name="keyword" value="{:input('get.keyword')}" class="text"><span class="iconfont icon-search"></span></div>
+    </form>
+  
+    <p class="clear"></p>
+  </div>
+</div>
+
+<div class="list">
+  {if condition="$Total>0"}
+  <table class="{if condition="isPermission('delete')"}left-fix{/if}{if condition="isPermission('update')||isPermission('delete')"} right-fix{/if}">
+    <thead><tr class="row1">{if condition="isPermission('delete')"}<th style="width:60px;"><div class="check-box"><label><input type="checkbox" class="all">全选</label></div></th>{/if}<th style="width:230px;">分销商</th><th style="width:120px;">提现金额</th><th style="width:80px;">提现状态</th><th style="width:160px;">申请时间</th>{if condition="isPermission('update')||isPermission('delete')"}<th style="width:80px;">操作</th>{/if}</tr></thead>
+    <tbody class="items"></tbody>
+  </table>
+
+  <div class="pagination"><ul></ul></div>
+  {else/}
+  <p class="nothing"></p>
+  {/if}
+</div>
+{/block}

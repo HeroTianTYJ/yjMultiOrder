@@ -1,0 +1,39 @@
+{extend name="../../common/view/public/base" /}
+
+{block name="title"}数据{/block}
+
+{block name="head"}<script type="text/javascript">
+CONFIG['PAGE_SIZE'] = {:config('app.page_size')};
+CONFIG['TOTAL'] = {$Total};
+CONFIG['LIST'] = window.location;
+</script>{/block}
+
+{block name="main"}
+<div class="tool">
+  <div class="row1">
+    <h2>访问统计</h2>
+  
+    <div class="button">
+    </div>
+  
+    <form method="get" action="" class="search layui-form" onsubmit="return false;">
+      <div class="search-text"><input type="text" name="keyword" value="{:input('get.keyword')}" class="text"><span class="iconfont icon-search"></span></div>
+    </form>
+  
+    <p class="clear"></p>
+  </div>
+</div>
+
+<div class="list">
+  {if condition="$Total>0"}
+  <table>
+    <thead><tr class="row1"><th style="width:200px;">IP</th><th style="width:420px;">访问页面</th><th style="width:100px;">当日访问次数</th><th style="width:90px;">第一次</th><th style="width:90px;">最后一次</th></tr></thead>
+    <tbody class="items"></tbody>
+  </table>
+
+  <div class="pagination"><ul></ul></div>
+  {else/}
+  <p class="nothing"></p>
+  {/if}
+</div>
+{/block}

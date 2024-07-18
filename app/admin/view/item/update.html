@@ -1,0 +1,163 @@
+<script type="text/javascript" src="static/library/ckeditor/ckeditor.js?{:staticCache()}"></script>
+<script type="text/javascript" src="static/library/jquery/ui.js?{:staticCache()}"></script>
+<script type="text/javascript" src="static/library/jquery/color_picker.js?{:staticCache()}"></script>
+<script type="text/javascript" src="static/library/web_uploader/web_uploader_html5.js?{:staticCache()}"></script>
+<script type="text/javascript" src="static/library/xm_select.js?{:staticCache()}"></script>
+<script type="text/javascript" src="static/yj.admin.ui/js/jquery/gallery.js?{:staticCache()}"></script>
+<script type="text/javascript" src="static/admin/js/{:parse_name(request()->controller())}_form.js?{:staticCache()}"></script>
+<link rel="stylesheet" type="text/css" href="static/library/web_uploader/web_uploader.css?{:staticCache()}">
+<link rel="stylesheet" type="text/css" href="static/yj.admin.ui/css/gallery.css?{:staticCache()}">
+<script type="text/javascript">
+CONFIG['WEB_URL'] = '{:config("url.web1")}';
+CONFIG['UPLOAD_SERVER'] = '{:url("/common/upload")}';
+CONFIG['UPLOAD_DIR'] = '{:config("system.qiniu_domain")}' || '{:config("dir.upload")}';
+CONFIG['PICTURE_DIR'] = '{:url("/picture/pictureDir")}';
+CONFIG['PICTURE_LIST'] = '{:url("/picture/pictureList")}';
+CONFIG['AJAX'] = '{:url("/".parse_name(request()->controller())."/ajaxProduct")}';
+CONFIG['AJAX2'] = '{:url("/".parse_name(request()->controller())."/ajaxProduct2")}';
+</script>
+
+<form method="post" action="" class="form layui-form {:request()->action()}" onsubmit="return false;">
+  <ul class="tab">
+    <li class="active"><a href="javascript:">商品设置</a></li>
+    <li><a href="javascript:">网页设置</a></li>
+    <li><a href="javascript:">联系方式</a></li>
+    <li><a href="javascript:">商品主图</a></li>
+    <li><a href="javascript:">抢购描述</a></li>
+    <li><a href="javascript:">购买流程</a></li>
+    <li><a href="javascript:">商品介绍</a></li>
+    <li><a href="javascript:">客户服务</a></li>
+    <li><a href="javascript:">客户评价</a></li>
+    <li><a href="javascript:">自定义栏目</a></li>
+    <li><a href="javascript:">在线订购</a></li>
+    <li><a href="javascript:">栏目排序</a></li>
+    <li><a href="javascript:">底部导航</a></li>
+    <li><a href="javascript:">微信分享</a></li>
+    <p class="clear"></p>
+  </ul>
+  <table class="column">
+    <tr><td style="width:84px;">商品名称：</td><td><input type="text" name="name" value="{$One['name']}" class="text"></td></tr>
+    <tr class="tip"><td></td><td>此项必填，其它均为选填项</td></tr>
+    <tr><td>所属品牌：</td><td><select name="brand_id" lay-search><option value="">请选择</option>{$Brand}</select></td></tr>
+    <tr class="tip"><td></td><td>已过滤掉没有品牌的分类</td></tr>
+    <tr><td>预 览 图：</td><td><input type="hidden" name="preview" value="{$One['preview']}"><div class="gallery-insert"><div class="buttons"><input type="button" value="插入图片" class="button insert"><span class="local preview_picker"></span><input type="button" value="从图片库选择" class="button choose preview_choose"></div><ul>{if condition="$One['preview']"}<li><img src="{if condition="config('system.qiniu_domain')"}{:config('system.qiniu_domain')}{else/}{:config('dir.upload')}{/if}{$One['preview']}" _src="{$One['preview']}" alt="{$One['preview']}"><a href="javascript:" class="delete">删除</a></li>{/if}</ul></div></td></tr>
+    <tr class="tip"><td></td><td>建议插入375×375或以上的正方形图片</td></tr>
+    <tr><td>商品标签：</td><td><textarea name="tag" class="textarea">{$One['tag']}</textarea></td></tr>
+    <tr class="tip"><td></td><td>每一行代表一个标签，每个标签不建议超过4个字，将显示在商品页开头处的“立即购买”按钮的上方，且第一个标签将显示在商品列表中商品预览图的左上方，建议为4个字</td></tr>
+    <tr class="tag_bg"><td>标签背景：</td><td>{$TagBg}</td></tr>
+    <tr class="tip"><td></td><td>此背景将显示在商品列表中商品预览图的左上方</td></tr>
+    <tr><td>商品价格：</td><td>{$IsShowPrice}</td></tr>
+    <tbody class="price">
+    <tr><td>商品原价：</td><td><input type="text" name="price1" value="{$One['price1']}" class="text"></td></tr>
+    <tr><td>促 销 价：</td><td><input type="text" name="price2" value="{$One['price2']}" class="text"></td></tr>
+    <tr><td>销 售 量：</td><td><input type="text" name="sale" value="{$One['sale']}" class="text"></td></tr>
+    <tr><td>销售量递增：</td><td>每隔<input type="text" name="sale_minute" value="{$One['sale_minute']}" class="text text2">分钟递增<input type="text" name="sale_count" value="{$One['sale_count']}" class="text text2">个</td></tr>
+    <tr class="tip"><td></td><td>前台商品页中的销售量 = 后台设置的销售量 + 从商品页添加时间到现在的总分钟数 ÷ 递增分钟数 × 每分钟的递增个数</td></tr>
+    <tr><td>促销倒计时：</td><td><input type="text" name="countdown1" value="{$One['countdown1']}" class="text text3"> ～ <input type="text" name="countdown2" value="{$One['countdown2']}" class="text text3"></td></tr>
+    <tr class="tip"><td></td><td>单位：秒，填3600代表一小时，填86400代表一天，依此类推；当打开商品页时，会随机在倒计时区间中取一个值，进行倒计时</td></tr>
+    </tbody>
+    <tr><td>发货通知：</td><td>{$IsShowSend}</td></tr>
+    <tr class="tip"><td></td><td>设置是否在商品页开头处的“立即购买”按钮下方显示发货通知，嵌入下单页时有效（为模拟发货通知，并非从数据库里提取的数据）</td></tr>
+    <tr><td>参与分销：</td><td>{$IsDistribution}</td></tr>
+  </table>
+  <table class="column none">
+    <tr><td style="width:84px;">网页标题：</td><td><input type="text" name="title" value="{$One['title']}" class="text"></td></tr>
+    <tr class="tip"><td></td><td>建议在80个字符之内</td></tr>
+    <tr><td>网页关键词：</td><td><textarea name="keyword" class="textarea">{$One['keyword']}</textarea></td></tr>
+    <tr class="tip"><td></td><td>建议在100个字符之内</td></tr>
+    <tr><td>网页描述：</td><td><textarea name="description" class="textarea">{$One['description']}</textarea></td></tr>
+    <tr class="tip"><td></td><td>建议在200个字符之内</td></tr>
+    <tr><td>网页宽度：</td><td><input type="text" name="width" value="{$One['width']}" class="text"></td></tr>
+    <tr class="tip"><td></td><td>填数字，单位：px，图文编辑区中插入的图片建议大于等于此宽度</td></tr>
+    <tr><td>网页背景：</td><td><input type="text" name="bg_color" value="{$One['bg_color']}" class="text"></td></tr>
+    <tr class="tip"><td></td><td>网页背景值可以为：表示颜色的英文单词，如red；16进制的颜色代码，如#FF0000；10进制的颜色代码，如rgb(255,0,0)。</td></tr>
+    <tr><td>底部版权：</td><td><textarea name="copyright" class="textarea">{$One['copyright']}</textarea></td></tr>
+    <tr class="tip"><td></td><td><div class="gallery-insert"><div class="buttons"><input type="button" value="插入图片" class="button insert"><span class="local copyright_picker"></span><input type="button" value="从图片库选择" class="button choose copyright_choose"></div></div></td></tr>
+    <tr><td>第三方代码：</td><td>{$CodeType}</td></tr>
+    <tr class="tip"><td></td><td>全局代码请在<a href="{:url('/system/index')}" target="_blank">系统设置</a>模块中的前台设置中添加</td></tr>
+    <tr><td>独立代码：</td><td><textarea name="code" class="textarea">{$One['code']}</textarea></td></tr>
+    <tr class="tip"><td></td><td>此处可插入第三方代码，例如第三方网站统计的代码</td></tr>
+  </table>
+  <table class="column none">
+    <tr><td>联系电话：</td><td><input type="text" name="tel" value="{$One['tel']}" class="text"></td></tr>
+    <tr class="tip"><td></td><td>便于手机端用户直接拨打电话，号码中请不要包含“-”或空格</td></tr>
+    <tr><td>短信订购：</td><td><input type="text" name="sms" value="{$One['sms']}" class="text"></td></tr>
+    <tr class="tip"><td></td><td>便于手机端用户直接发送短信，号码中请不要包含“-”或空格</td></tr>
+    <tr><td>QQ：</td><td><input type="text" name="qq" value="{$One['qq']}" class="text"></td></tr>
+  </table>
+  <table class="column none">
+    <tr><td>商品主图：</td><td><input type="hidden" name="picture" value="{$One['picture']}"><div class="gallery-insert"><div class="buttons"><input type="button" value="插入图片" class="button insert"><span class="local picture_picker"></span><input type="button" value="从图片库选择" class="button choose picture_choose"></div><ul class="draggable">{if condition="$One['picture']"}{foreach name=":explode(',',$One['picture'])" key="key" item="value"}<li><img src="{if condition="config('system.qiniu_domain')"}{:config('system.qiniu_domain')}{else/}{:config('dir.upload')}{/if}{$value}" _src="{$value}" alt="{$value}"><a href="javascript:" class="delete">删除</a></li>{/foreach}{/if}</ul></div></td></tr>
+    <tr class="tip"><td></td><td style="height:50px;vertical-align:top;">请插入尺寸一致的图片，图片宽度建议大于等于“网页设置”中的“网页宽度”</td></tr>
+  </table>
+  <table class="column none">
+    <tr><td>抢购描述：</td><td><div class="gallery-insert"><div class="buttons"><input type="button" value="插入图片" class="button insert"><span class="local buy_picker"></span><input type="button" value="从图片库选择" class="button choose buy_choose"></div></div></td></tr>
+    <tr><td colspan="2"><textarea name="buy" id="TextArea1" class="ckeditor">{$One['buy']|escapePic2}</textarea></td></tr>
+  </table>
+  <table class="column none">
+    <tr><td>购买流程：</td><td><div class="gallery-insert"><div class="buttons"><input type="button" value="插入图片" class="button insert"><span class="local procedure_picker"></span><input type="button" value="从图片库选择" class="button choose procedure_choose"></div></div></td></tr>
+    <tr><td colspan="2"><textarea name="procedure" id="TextArea2" class="ckeditor">{$One['procedure']|escapePic2}</textarea></td></tr>
+  </table>
+  <table class="column none">
+    <tr><td>商品介绍：</td><td><div class="gallery-insert"><div class="buttons"><input type="button" value="插入图片" class="button insert"><span class="local introduce_picker"></span><input type="button" value="从图片库选择" class="button choose introduce_choose"></div></div></td></tr>
+    <tr><td colspan="2"><textarea name="introduce" id="TextArea3" class="ckeditor">{$One['introduce']|escapePic2}</textarea></td></tr>
+  </table>
+  <table class="column none">
+    <tr><td>客户服务：</td><td><div class="gallery-insert"><div class="buttons"><input type="button" value="插入图片" class="button insert"><span class="local service_picker"></span><input type="button" value="从图片库选择" class="button choose service_choose"></div></div></td></tr>
+    <tr><td colspan="2"><textarea name="service" id="TextArea4" class="ckeditor">{$One['service']|escapePic2}</textarea></td></tr>
+  </table>
+  <table class="column none">
+    <tr><td>客户评价：</td><td>{$CommentType}</td></tr>
+    <tbody class="comment">
+    <tr><td>评价内容：</td><td><textarea name="comment" class="textarea" style="height:300px;">{$One['comment']}</textarea></td></tr>
+    <tr class="tip"><td></td><td>每一行代表一个评价</td></tr>
+    </tbody>
+    <tbody class="message_board">
+    <tr><td>留 言 板：</td><td><select name="message_board_id" lay-search>{$MessageBoard}</select></td></tr>
+    <tr class="tip"><td></td><td>多个商品页可共用一个留言板</td></tr>
+    </tbody>
+  </table>
+  <table class="column none">
+    <tr><td style="width:79px;">栏目名称1：</td><td><input type="text" name="column_name1" value="{$One['column_name1']}" class="text"> <div class="gallery-insert"><div class="buttons"><input type="button" value="插入图片" class="button insert"><span class="local column1_picker"></span><input type="button" value="从图片库选择" class="button choose column1_choose"></div></div></td></tr>
+    <tr><td colspan="2"><textarea name="column_content1" id="TextArea5" class="ckeditor">{$One['column_content1']|escapePic2}</textarea></td></tr>
+    <tr><td>栏目名称2：</td><td><input type="text" name="column_name2" value="{$One['column_name2']}" class="text"> <div class="gallery-insert"><div class="buttons"><input type="button" value="插入图片" class="button insert"><span class="local column2_picker"></span><input type="button" value="从图片库选择" class="button choose column2_choose"></div></div></td></tr>
+    <tr><td colspan="2"><textarea name="column_content2" id="TextArea6" class="ckeditor">{$One['column_content2']|escapePic2}</textarea></td></tr>
+    <tr><td>栏目名称3：</td><td><input type="text" name="column_name3" value="{$One['column_name3']}" class="text"> <div class="gallery-insert"><div class="buttons"><input type="button" value="插入图片" class="button insert"><span class="local column3_picker"></span><input type="button" value="从图片库选择" class="button choose column3_choose"></div></div></td></tr>
+    <tr><td colspan="2"><textarea name="column_content3" id="TextArea7" class="ckeditor">{$One['column_content3']|escapePic2}</textarea></td></tr>
+    <tr><td>栏目名称4：</td><td><input type="text" name="column_name4" value="{$One['column_name4']}" class="text"> <div class="gallery-insert"><div class="buttons"><input type="button" value="插入图片" class="button insert"><span class="local column4_picker"></span><input type="button" value="从图片库选择" class="button choose column4_choose"></div></div></td></tr>
+    <tr><td colspan="2"><textarea name="column_content4" id="TextArea8" class="ckeditor">{$One['column_content4']|escapePic2}</textarea></td></tr>
+    <tr><td>栏目名称5：</td><td><input type="text" name="column_name5" value="{$One['column_name5']}" class="text"> <div class="gallery-insert"><div class="buttons"><input type="button" value="插入图片" class="button insert"><span class="local column5_picker"></span><input type="button" value="从图片库选择" class="button choose column5_choose"></div></div></td></tr>
+    <tr><td colspan="2"><textarea name="column_content5" id="TextArea9" class="ckeditor">{$One['column_content5']|escapePic2}</textarea></td></tr>
+  </table>
+  <table class="column none">
+    <tr><td>下单模板：</td><td><select name="template_id" lay-search><option value="0">不嵌入</option>{$Template}</select></td></tr>
+    <tr class="tip"><td></td><td>多个商品页可共用一个下单模板</td></tr>
+    <tr><td>商品分类：</td><td>{$ProductType}</td></tr>
+    <tr class="product_sort1"><td>选择分类：</td><td><select name="product_sort_id" lay-filter="product_sort_id" lay-search>{$ProductSort}</select></td></tr>
+    <tr class="product1"><td>选择商品：</td><td><input type="hidden" name="product_ids1" value="{if condition="$One['product_type']==0"}{$One['product_ids']}{/if}"><input type="hidden" class="product_default" value="{$One['product_default']}"><div class="product_ids1 xm-select"></div></td></tr>
+    <tr class="product2"><td>选择商品：</td><td><input type="hidden" name="product_sort_ids"><input type="hidden" name="product_ids2" value="{if condition="$One['product_type']==1"}{$One['product_ids']}{/if}"><div class="product_ids2 xm-select"></div></td></tr>
+    <tr class="tip"><td></td><td>生成的下单页只显示勾选且在<a href="{:url('/product/index')}" target="_blank">商品管理</a>模块中设置了前台显示的商品</td></tr>
+    <tr class="product_default1"><td>默认商品：</td><td><select name="product_default1" lay-search></select></td></tr>
+    <tr class="product_default2"><td>默认商品：</td><td><select name="product_default2" lay-search></select></td></tr>
+    <tr><td>商品显示：</td><td>{$ProductViewType}</td></tr>
+  </table>
+  <table class="column none">
+    <tr><td>栏目排序：</td><td class="column_sort">{$ColumnSort}</td></tr>
+    <tr class="tip"><td></td><td>请用鼠标左键按住左侧栏目进行拖拽排序</td></tr>
+  </table>
+  <table class="column none">
+    <tr><td>导航链接：</td><td><textarea name="nav" class="textarea">{$One['nav']}</textarea></td></tr>
+    <tr><td></td><td class="tip">每一行代表一个导航，最多支持三个导航，点击下方的文字可以快速插入导航</td></tr>
+    <tr><td></td><td class="tip nav"><a href="javascript:">QQ咨询</a> <a href="javascript:">电话咨询</a> <a href="javascript:">短信咨询</a> <a href="javascript:">联系方式</a> <a href="javascript:">在线订购</a> <a href="javascript:">返回顶部</a> <a href="javascript:">商品主图</a> <a href="javascript:">价格信息</a> <a href="javascript:">抢购描述</a> <a href="javascript:">购买流程</a> <a href="javascript:">商品介绍</a> <a href="javascript:">客户服务</a> <a href="javascript:">客户评价</a> <a href="javascript:">自定义栏目1</a><br><a href="javascript:">自定义栏目2</a> <a href="javascript:">自定义栏目3</a> <a href="javascript:">自定义栏目4</a> <a href="javascript:">自定义栏目5</a> <a href="javascript:">到底部</a> <a href="javascript:">自定义锚点链接</a> <a href="javascript:">自定义本窗口链接</a> <a href="javascript:">自定义新窗口链接</a> <div class="gallery-insert" style="display:inline-block;"><div class="buttons"><input type="button" value="微信客服" title="当非微信小程序端访问前台页面时，点击底部导航中的“微信客服”将弹出微信二维码；当在微信小程序端点击时，将进入微信小程序客服会话" class="button insert"><span class="local qrcode_picker"></span><input type="button" value="从图片库选择" class="button choose qrcode_choose"></div></div></td></tr>
+    <tr><td>导航图标：</td><td><textarea name="icon" class="textarea">{$One['icon']}</textarea></td></tr>
+    <tr><td></td><td class="tip">每一行代表一个图标，分别对应上方设置的导航，点击下方的文字可以快速插入内置图标，也可以插入自定义图标，建议尺寸：15×15</td></tr>
+    <tr class="tip"><td></td><td class="icon" style="height:80px;vertical-align:top;"><a href="javascript:">QQ咨询</a> <a href="javascript:">电话咨询</a> <a href="javascript:">短信咨询</a> <a href="javascript:">返回顶部</a> <a href="javascript:">在线订购</a> <a href="javascript:">商品列表</a> <a href="javascript:">微信客服</a> <div class="gallery-insert" style="display:inline-block;"><div class="buttons"><input type="button" value="自定义图标" class="button insert"><span class="local icon_picker"></span><input type="button" value="从图片库选择" class="button choose icon_choose"></div></div></td></tr>
+  </table>
+  <table class="column none">
+    <tr><td>分享标题：</td><td><input type="text" name="share_title" value="{$One['share_title']}" class="text"></td></tr>
+    <tr class="tip"><td></td><td>如留空，分享时将采用“网页设置”中的“网页标题”</td></tr>
+    <tr><td>预 览 图：</td><td><input type="hidden" name="share_pic" value="{$One['share_pic']}"><div class="gallery-insert"><div class="buttons"><input type="button" value="插入图片" class="button insert"><span class="local share_pic_picker"></span><input type="button" value="从图片库选择" class="button choose share_pic_choose"></div><ul>{if condition="$One['share_pic']"}<li><img src="{if condition="config('system.qiniu_domain')"}{:config('system.qiniu_domain')}{else/}{:config('dir.upload')}{/if}{$One['share_pic']}" _src="{$One['share_pic']}" alt="{$One['share_pic']}"><a href="javascript:" class="delete">删除</a></li>{/if}</ul></div></td></tr>
+    <tr class="tip"><td></td><td>建议插入300×300或以上的正方形图片，如果不插入，预览图默认为品牌logo</td></tr>
+    <tr><td>分享摘要：</td><td><textarea name="share_desc" class="textarea">{$One['share_desc']}</textarea></td></tr>
+    <tr class="tip"><td></td><td>如留空，分享时将采用“网页设置”中的“网页描述”</td></tr>
+  </table>
+</form>

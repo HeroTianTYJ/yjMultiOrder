@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0">
+<meta name="keywords" content="{$One['keyword']}">
+<meta name="description" content="{$One['description']}">
+<title>{$One['title']}</title>
+<base href="{:config('url.web1')}">
+<script type="text/javascript" src="static/library/jquery/jquery.js"></script>
+<script type="text/javascript" src="static/library/lazy_load.js"></script>
+<script type="text/javascript" src="static/library/layer/layer.js"></script>
+<script type="text/javascript" src="static/library/swiper.js?{:staticCache()}"></script>
+<script type="text/javascript" src="static/library/i_scroll.js"></script>
+<script type="text/javascript" src="static/index/js/common.js"></script>
+<script type="text/javascript" src="static/index/js/item.js"></script>
+<link rel="shortcut icon" type="image/x-icon" href="static/index/images/favicon.ico">
+<link rel="stylesheet" type="text/css" href="static/library/layer/layer.css?{:staticCache()}">
+<link rel="stylesheet" type="text/css" href="static/index/css/basic.css">
+<link rel="stylesheet" type="text/css" href="static/index/css/item.css">
+{if condition="$One['share']"}
+<script type="text/javascript" src="//res.wx.qq.com/open/js/jweixin-1.6.0.js?{:staticCache()}"></script>
+<script type="text/javascript">wx.config({appId:'{$One["share"]["appid"]}',timestamp:'{$One["share"]["timestamp"]}',nonceStr:'{$One["share"]["nonce_str"]}',signature:'{$One["share"]["signature"]}',jsApiList:['updateAppMessageShareData','updateTimelineShareData','onMenuShareWeibo']});wx.ready(function(){let config={title:'{$One["share_title"]}'||'{$One["title"]}',desc:'{$One["share_desc"]}'||'{$One["description"]}',imgUrl:('{:config("system.qiniu_domain")}'||'{:config("url.web1")}{:config("dir.upload")}')+('{$One["share_pic"]}'||'{$One["preview"]}'),link:'{$One["share"]["url"]}'};wx.updateAppMessageShareData(config);wx.updateTimelineShareData(config);wx.onMenuShareWeibo(config);});</script>
+{/if}
+<script type="text/javascript">
+let CONFIG = {
+  UPLOAD_DIR: '{:config("system.qiniu_domain")}' || '{:config("dir.upload")}',
+  COUNTDOWN: '{:rand($One["countdown1"],$One["countdown2"])}',
+  QRCODE: '{:url("/qrcode/index")}'
+};
+</script>
+<style>
+body {
+    background: {$One['bg_color']};
+}
+.container {
+    max-width: {$One['width']}px;
+}
+</style>
+</head>
+<body>
+<a class="anchor" id="top"></a>
+
+<header class="header">
+  <div class="container">
+    <span></span>
+    
+    <h1>{$One['name']}</h1>
+    
+    <div class="top-nav hidden">
+    <ul>
+      <li><a href="javascript:" class="hash i_scroll" hash="top">返回顶部</a></li>
+      <li><a href="javascript:" class="hash i_scroll" hash="picture">商品主图</a></li>
+      {if condition="$One['is_show_price']"}<li><a href="javascript:" class="hash i_scroll" hash="section">商品价格</a></li>{/if}
+      {foreach name="One['sort']" key="key" item="value"}{if condition="$One['columnNav'][$value]"}<li><a href="javascript:" class="hash i_scroll" hash="{$One['columnNav'][$value][0]}">{$One['columnNav'][$value][1]}</a></li>{/if}{/foreach}
+      <li><a href="javascript:" class="hash i_scroll last" hash="footer">去底部</a></li>
+    </ul>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="picture"><a class="anchor" id="picture"></a>{$One['picture_str']}</div>
+  
+  <section class="section">
+    <a class="anchor" id="section"></a>
+    {if condition="$One['is_show_price']"}
+    <div class="row1">
+      <img src="static/index/images/section.png" alt="价格信息">
+      <strong class="col1"><span>￥</span>{$One['price2']}</strong>
+      <div class="col2">
+        <p class="price1">原价：<s>{$One['price1']}元</s></p>
+        <p class="price2"><span class="a">立</span>省{$One['save']}<span class="b">元</span></p>
+      </div>
+      <div class="col3">
+        <p class="a">距离结束仅剩</p>
+        <p class="countdown"></p>
+      </div>
+    </div>
+    {/if}
+    <div class="row2">
+      <div class="sale">已有 {$One['sale']} 人购买</div>
+      <ul class="tag">{foreach name="One['tag']" key="key" item="value"}<li>{$value}</li>{/foreach}<p class="clear"></p></ul>
+    </div>
+    <div class="row3">
+      <p class="buy"><a href="javascript:" class="btn hash" hash="order">立即购买</a></p>
+      {if condition="$One['is_show_send']&&$One['template_id']"}<div class="send"><p class="bg"></p><div class="new"></div><p class="bg"></p></div>{/if}
+    </div>
+  </section>
+  
+  <article class="article">
+    {foreach name="One['sort']" key="key" item="value"}{$One['columnArr'][$value]}{/foreach}
+    <p class="clear"></p>
+  </article>
+  
+  <footer class="footer">
+    <a class="anchor" id="footer"></a>
+	<p class="border"></p>{$One['copyright']|escapePic}
+  </footer>
+</div>
+
+{$One['nav_str']}
+
+<div class="tip"></div>
+
+{if condition="$One['template_id']==0"}<script type="text/javascript" src="static/index/js/visit.js"></script>{/if}
+{$One['code']}
+{if condition="$One['code_type']==0"}{:config('system.code')}{/if}
+</body>
+</html>

@@ -1,0 +1,41 @@
+{extend name="../../common/view/public/base" /}
+
+{block name="title"}推广{/block}
+
+{block name="head"}<script type="text/javascript">
+CONFIG['PAGE_SIZE'] = {:config('app.page_size')};
+CONFIG['TOTAL'] = {$Total};
+CONFIG['LIST'] = window.location;
+</script>{/block}
+
+{block name="main"}
+<div class="tool">
+  <div class="row1">
+    <h2>商品页</h2>
+  
+    <input type="hidden" name="ids">
+  
+    <form method="get" action="" class="search layui-form" onsubmit="return false;">
+      <select name="brand_id" lay-search lay-filter="brand_id"><option value="0">查看所有品牌</option>{$Brand}</select> <select name="wxxcx_id" lay-search lay-filter="wxxcx_id"><option value="0">查看微信小程序访问量</option>{$Wxxcx}</select> <div class="search-text"><input type="text" name="keyword" value="{:input('get.keyword')}" class="text"><span class="iconfont icon-search"></span></div>
+    </form>
+  
+    <p class="clear"></p>
+  </div>
+</div>
+
+<div class="list">
+  {if condition="$Total>0"}
+  <table>
+    <thead>
+      <tr class="row1"><th style="width:150px;" rowspan="2">商品名称</th><th style="width:150px;" rowspan="2">所属品牌</th><th style="width:80px;" rowspan="2">商品原价</th><th style="width:80px;" rowspan="2">促销价</th><th colspan="2">访问量</th><th style="width:450px;" rowspan="2">推广链接</th></tr>
+      <tr><th style="width:80px;">网页端</th><th style="width:80px;">小程序</th></tr>
+    </thead>
+    <tbody class="items"></tbody>
+  </table>
+
+  <div class="pagination"><ul></ul></div>
+  {else/}
+  <p class="nothing"></p>
+  {/if}
+</div>
+{/block}

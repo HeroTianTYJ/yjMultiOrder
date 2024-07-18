@@ -1,0 +1,15 @@
+<style type="text/css">
+.form table tr td:nth-child(1){
+    text-align:left;
+    width:auto;
+}
+</style>
+
+<form method="post" action="" class="form layui-form {:request()->action()}" onsubmit="return false;">
+  <table>
+    <tr><td>当订单满足以下条件，即可进行结算：</td></tr>
+    <tr><td>1、订单为未结算状态；</td></tr>
+    <tr><td>2、订单为已签收状态。</td></tr>
+    <tr><td>您当前满足以上条件的订单有<span class="red">{$One['count']}笔</span>，分销佣金为<span class="red">{if condition="$One['sum']"}{$One['sum']}{else/}0.00{/if}元</span>，点击下方的“确定”按钮即可进行一键结算。</td></tr>
+  </table>
+</form>

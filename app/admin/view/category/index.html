@@ -1,0 +1,59 @@
+{extend name="../../common/view/public/base" /}
+
+{block name="title"}品牌{/block}
+
+{block name="head"}<link rel="stylesheet" type="text/css" href="static/admin/css/{:parse_name(request()->controller())}.css?{:staticCache()}">
+<script type="text/javascript">
+CONFIG['PAGE_SIZE'] = {:config('app.page_size')};
+CONFIG['TOTAL'] = {$Total};
+CONFIG['LIST'] = window.location;
+CONFIG['INDEX'] = '{:url("/".parse_name(request()->controller())."/index")}';
+CONFIG['ADD'] = '{:url("/".parse_name(request()->controller())."/add",["parent_id"=>input("get.parent_id",0)])}';
+CONFIG['ADD_DO'] = '{:url("/".parse_name(request()->controller())."/add",["parent_id"=>input("get.parent_id",0),"action"=>"do"])}';
+CONFIG['MULTI'] = '{:url("/".parse_name(request()->controller())."/multi",["parent_id"=>input("get.parent_id",0)])}';
+CONFIG['UPDATE'] = '{:url("/".parse_name(request()->controller())."/update")}';
+CONFIG['UPDATE_DO'] = '{:url("/".parse_name(request()->controller())."/update",["action"=>"do"])}';
+CONFIG['DELETE'] = '{:url("/".parse_name(request()->controller())."/delete")}';
+CONFIG['IS_VIEW'] = '{:url("/".parse_name(request()->controller())."/isView")}';
+CONFIG['IS_DEFAULT'] = '{:url("/".parse_name(request()->controller())."/isDefault")}';
+CONFIG['SORT'] = '{:url("/".parse_name(request()->controller())."/sort")}';
+CONFIG['PARENT_ID'] = {:input("get.parent_id",0)};
+</script>{/block}
+
+{block name="main"}
+<div class="tool">
+  <div class="row1">
+    {if condition="input('parent_id',0)==0"}<h2>品牌分类</h2>{else/}<h3><a href="{:url('/'.parse_name(request()->controller()).'/index')}">品牌分类</a> - {$ParentName}</h3>{/if}
+  
+    <input type="hidden" name="ids">
+  
+    <div class="button">
+      {if condition="isPermission('add')"}<input type="button" value="添加品牌分类" class="button add">{/if}
+      {if condition="isPermission('multi')"}<input type="button" value="批量添加品牌分类" class="button multi">{/if}
+      {if condition="isPermission('delete')"}<input type="button" value="批量删除" class="button disabled must_select delete" disabled>{/if}
+    </div>
+  
+    <form method="get" action="" class="search layui-form" onsubmit="return false;">
+      {if condition="input('parent_id',0)==0"}<select lay-filter="wxxcx_id" lay-search><option value="0">查看微信小程序访问量</option>{$Wxxcx}</select> <select lay-filter="manager_id" lay-search><option value="0">查看分销商访问量</option>{$Manager}</select> {/if}<div class="search-text"><input type="text" name="keyword" value="{:input('get.keyword')}" class="text"><span class="iconfont icon-search"></span></div>
+    </form>
+  
+    <p class="clear"></p>
+  </div>
+</div>
+
+<div class="list">
+  {if condition="$Total>0"}
+  <table class="{if condition="isPermission('delete')"}left-fix{/if}{if condition="isPermission('update')||isPermission('delete')||input('parent_id',0)==0"} right-fix{/if}">
+    <thead>
+      <tr class="row1">{if condition="isPermission('delete')"}<th style="width:60px;" rowspan="2"><div class="check-box"><label><input type="checkbox" class="all">全选</label></div></th>{/if}<th style="width:250px;" rowspan="2">分类名称</th>{if condition="isPermission('sort')"}<th style="width:100px;" rowspan="2"><input type="button" value="排序" class="button sort"></th>{/if}{if condition="isPermission('isView')"}<th style="width:80px;" rowspan="2">是否上架</th>{/if}{if condition="isPermission('isDefault')&&input('parent_id',0)==0"}<th style="width:80px;" rowspan="2">是否默认</th>{/if}<th style="width:160px;" rowspan="2">添加时间</th>{if condition="input('parent_id',0)==0"}<th colspan="2">访问量</th>{/if}{if condition="(isPermission('update')||isPermission('delete'))||input('parent_id',0)==0"}<th style="width:{if condition="input('parent_id',0)==0"}180{else/}80{/if}px;" rowspan="2">操作</th>{/if}</tr>
+      {if condition="input('parent_id',0)==0"}<tr><th style="width:80px;">网页端</th><th style="width:80px;">小程序</th></tr>{/if}
+    </thead>
+    <tbody class="items"></tbody>
+  </table>
+
+  <div class="pagination"><ul></ul></div>
+  {else/}
+  <p class="nothing"></p>
+  {/if}
+</div>
+{/block}

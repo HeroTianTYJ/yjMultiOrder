@@ -1,0 +1,18 @@
+<script type="text/javascript" src="static/library/code_mirror/code_mirror.js?{:staticCache()}"></script>
+<script type="text/javascript" src="static/library/code_mirror/css.js?{:staticCache()}"></script>
+<script type="text/javascript" src="static/library/code_mirror/match_brackets.js?{:staticCache()}"></script>
+<script type="text/javascript" src="static/admin/js/{:parse_name(request()->controller())}_form.js?{:staticCache()}"></script>
+<link rel="stylesheet" type="text/css" href="static/library/code_mirror/code_mirror.css?{:staticCache()}">
+<style>
+.CodeMirror, .CodeMirror-scroll {
+    height: 350px;
+    max-height: 350px;
+}
+</style>
+
+<form method="post" action="" class="form layui-form {:request()->action()}" onsubmit="return false;">
+  <table>
+    <tr><td class="tip">您当前正在修改：{$One['filename']}（{$One['type']}CSS - {$One['description']}）</td></tr>
+    <tr><td class="code"><textarea name="code">{$One['code']}</textarea></td></tr>
+  </table>
+</form>

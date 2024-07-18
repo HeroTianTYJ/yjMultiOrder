@@ -1,0 +1,31 @@
+{extend name="../../common/view/public/base" /}
+
+{block name="title"}订单{/block}
+{block name="head"}<link rel="stylesheet" type="text/css" href="static/admin/css/{:parse_name(request()->controller())}.css?{:staticCache()}">
+<script type="text/javascript" src="static/library/jquery/ui.js?{:staticCache()}"></script>
+<script type="text/javascript">
+CONFIG['RESTORE'] = '{:url("/".parse_name(request()->controller())."/restore")}';
+</script>{/block}
+
+{block name="main"}
+<div class="tool">
+  <div class="row1">
+    <h2>订单界面设置</h2>
+    <p class="clear"></p>
+  </div>
+</div>
+
+<form method="post" action="" class="form layui-form">
+  <table>
+    <tr><td>此功能可自定义订单列表和订单详情界面，<a href="javascript:" class="restore">点击此处</a>恢复默认设置</td></tr>
+    <tr><td>温馨提示：<div class="radio-box"><label><input type="radio" name="reminder" value="1" {if condition="config('order_ui.reminder',1)==1"}checked{/if}>显示</label></div><div class="radio-box"><label><input type="radio" name="reminder" value="0" {if condition="config('order_ui.reminder',1)==0"}checked{/if}>隐藏</label></div>　　高级搜索：<div class="radio-box"><label><input type="radio" name="search" value="1" {if condition="config('order_ui.search',1)==1"}checked{/if}>显示</label></div><div class="radio-box"><label><input type="radio" name="search" value="0" {if condition="config('order_ui.search',1)==0"}checked{/if}>隐藏</label></div></td></tr>
+    <tr><td>高级搜索（可用鼠标左键按住以下项目进行拖拽排序，勾选复选框表示将显示此项目）：</td></tr>
+    <tr><td class="sort">{$SearchSort}</td></tr>
+    <tr><td>订单列表（可用鼠标左键按住以下项目进行拖拽排序，勾选复选框表示将显示此项目，文本框中的数字表示此项目在订单列表中所占的宽度，单位为px）：</td></tr>
+    <tr><td class="sort">{$List}</td></tr>
+    <tr><td>订单详情（可用鼠标左键按住以下项目进行拖拽排序，勾选复选框表示将显示此项目）：</td></tr>
+    <tr><td class="sort">{$DetailSort}</td></tr>
+    <tr><td><input type="submit" value="确认修改" class="button"></td></tr>
+  </table>
+</form>
+{/block}

@@ -1,0 +1,59 @@
+{extend name="../../common/view/public/base" /}
+
+{block name="title"}订单{/block}
+
+{block name="head"}<script type="text/javascript" src="static/yj.admin.ui/js/jquery/number.js?{:staticCache()}"></script>
+<link rel="stylesheet" type="text/css" href="static/library/lay_ui/css/date.css?{:staticCache()}">
+<link rel="stylesheet" type="text/css" href="static/distributor/css/{:parse_name(request()->controller())}.css?{:staticCache()}">
+<script type="text/javascript">
+CONFIG['PAGE_SIZE'] = {:config('app.page_size')};
+CONFIG['TOTAL'] = {$Total};
+CONFIG['LIST'] = window.location;
+CONFIG['ADD'] = '{:url("/".parse_name(request()->controller())."/add")}';
+CONFIG['ADD_DO'] = '{:url("/".parse_name(request()->controller())."/add",["action"=>"do"])}';
+CONFIG['BALANCE'] = '{:url("/".parse_name(request()->controller())."/balance")}';
+CONFIG['DETAIL'] = '{:url("/".parse_name(request()->controller())."/detail")}';
+</script>{/block}
+
+{block name="main"}
+<div class="tool advance">
+  <div class="row1">
+    <h2>订单</h2>
+  
+    <input type="hidden" name="ids">
+  
+    <div class="button">
+      <input type="button" value="添加订单" class="button add">
+      <input type="button" value="分销结算" class="button balance">
+    </div>
+
+    <p class="clear"></p>
+  </div>
+
+  {include file="order/search" /}
+</div>
+
+<div class="list">
+  {if condition="$Total>0"}
+  <table class="right-fix">
+    <thead><tr class="row1"><th style="width:100px;">订单号</th><th style="width:130px;">下单模板</th><th style="width:130px;">订购商品</th><th style="width:130px;">商品属性</th><th style="width:70px;">成交单价</th><th style="width:70px;">订购数量</th><th style="width:70px;">成交总价</th><th style="width:70px;">分销佣金</th><th style="width:80px;">下单时间</th><th style="width:80px;">支付方式</th><th style="width:80px;">订单状态</th><th style="width:140px;">快递信息</th><th style="width:60px;">操作</th></tr></thead>
+    <tbody class="items"></tbody>
+  </table>
+
+  <div class="pagination"><ul></ul></div>
+  {else/}
+  <p class="nothing"></p>
+  {/if}
+</div>
+{/block}
+
+{block name="right"}
+<div class="right">
+  <h3>温馨提示 <span class="iconfont icon-fold"></span></h3>
+  <ul>
+    <li>点击快递单号可查询物流进度。</li>
+  </ul>
+
+  <span class="iconfont icon-expand color"></span>
+</div>
+{/block}
