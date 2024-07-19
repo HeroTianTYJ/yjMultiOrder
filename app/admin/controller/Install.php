@@ -81,7 +81,9 @@ return [
                     return $this->failed('数据库创建失败！');
                 }
                 mysqli_select_db($link, $installStep['database']);
-                mysqli_query($link, 'SET NAMES ' . $installStep['charset']);
+                if (!mysqli_query($link, 'SET NAMES ' . $installStep['charset'] . ';')) {
+                    return $this->failed('数据库字符集设置错误！');
+                }
                 foreach (
                     explode(';', str_replace(
                         'yjorder_',
