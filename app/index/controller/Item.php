@@ -27,7 +27,7 @@ class Item extends Base
 
             if (
                 Config::get('system.wechat_app_id') && Config::get('system.wechat_app_secret') &&
-                in_array(device(), ['androidWechat', 'iphoneWechat', 'windowsWechat', 'macWechat'])
+                in_array(device(), ['harmonyWechat', 'androidWechat', 'iphoneWechat', 'windowsWechat', 'macWechat'])
             ) {
                 $Wechat = new Wechat([
                     'app_id' => Config::get('system.wechat_app_id'),
