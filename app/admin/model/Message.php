@@ -30,11 +30,11 @@ class Message extends Model
     public function all()
     {
         try {
+            $tablePrefix = Config::get('database.connections.mysql.prefix');
             $map = [
                 'where' => '(`name` LIKE :name OR `tel` LIKE :tel OR `email` LIKE :email OR `text_id_content` IN ' .
-                    '(SELECT `id` FROM ' . $this->getTable('text') . ' WHERE `content` LIKE :content) OR ' .
-                    '`text_id_reply` IN (SELECT `id` FROM ' . $this->getTable('text') . ' WHERE `content` LIKE ' .
-                    ':reply) OR `ip` LIKE :ip)',
+                    '(SELECT `id` FROM `' . $tablePrefix . 'text` WHERE `content` LIKE :content) OR `text_id_reply` ' .
+                    'IN (SELECT `id` FROM `' . $tablePrefix . 'text` WHERE `content` LIKE :reply) OR `ip` LIKE :ip)',
                 'value' => [
                     'name' => '%' . Request::get('keyword') . '%',
                     'tel' => '%' . Request::get('keyword') . '%',
