@@ -228,7 +228,7 @@ class Bill extends Model
             unset($data['note']);
             return $this->insertGetId($data);
         } else {
-            return $validate->getError();
+            return implode($validate->getError());
         }
     }
     public function add2(
@@ -283,7 +283,7 @@ class Bill extends Model
             unset($data['note']);
             return $this->where(['id' => Request::post('id')])->where($this->managerId())->update($data);
         } else {
-            return $validate->getError();
+            return implode($validate->getError());
         }
     }
 

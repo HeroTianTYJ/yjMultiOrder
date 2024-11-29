@@ -115,7 +115,7 @@ class Wxxcx extends Model
             unset($data['pay_cert_private_key']);
             return $this->insertGetId($data);
         } else {
-            return $validate->getError();
+            return implode($validate->getError());
         }
     }
 
@@ -156,7 +156,7 @@ class Wxxcx extends Model
             unset($data['pay_cert_private_key']);
             return $this->where(['id' => Request::post('id')])->update($data);
         } else {
-            return $validate->getError();
+            return implode($validate->getError());
         }
     }
     public function modify2($zip = '')

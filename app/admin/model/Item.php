@@ -246,7 +246,7 @@ class Item extends Model
             unset($data['column_content4'], $data['column_content5'], $data['nav']);
             return $this->insertGetId($data);
         } else {
-            return $validate->getError();
+            return implode($validate->getError());
         }
     }
 
@@ -373,7 +373,7 @@ class Item extends Model
             unset($data['column_content4'], $data['column_content5'], $data['nav']);
             return $this->where(['id' => Request::post('id')])->update($data);
         } else {
-            return $validate->getError();
+            return implode($validate->getError());
         }
     }
     public function modify2()

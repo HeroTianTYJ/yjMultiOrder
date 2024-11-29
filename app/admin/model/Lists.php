@@ -126,7 +126,7 @@ class Lists extends Model
             unset($data['code'], $data['item_ids'], $data['nav'], $data['banner']);
             return $this->insertGetId($data);
         } else {
-            return $validate->getError();
+            return implode($validate->getError());
         }
     }
 
@@ -175,7 +175,7 @@ class Lists extends Model
             unset($data['code'], $data['item_ids'], $data['banner'], $data['nav']);
             return $this->where(['id' => Request::post('id')])->update($data);
         } else {
-            return $validate->getError();
+            return implode($validate->getError());
         }
     }
 

@@ -86,7 +86,7 @@ class BrandPage extends Model
             unset($data['code'], $data['nav']);
             return $this->where(['id' => 1])->update($data);
         } else {
-            return $validate->getError();
+            return implode($validate->getError());
         }
     }
 }

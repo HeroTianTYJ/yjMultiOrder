@@ -26,7 +26,7 @@ class Manager extends Model
                     ->where(['name' => Request::post('name')])
                     ->find();
             } else {
-                return $validate->getError();
+                return implode($validate->getError());
             }
         } catch (Exception $e) {
             echo $e->getMessage();
@@ -73,7 +73,7 @@ class Manager extends Model
             unset($data['repass']);
             return $this->insertGetId($data);
         } else {
-            return $validate->getError();
+            return implode($validate->getError());
         }
     }
 
@@ -114,7 +114,7 @@ class Manager extends Model
             }
             return $this->where(['id' => $one['id']])->update($data);
         } else {
-            return $validate->getError();
+            return implode($validate->getError());
         }
     }
 

@@ -122,7 +122,7 @@ class Manager extends Model
                     ->where(['name' => Request::post('name')])
                     ->find();
             } else {
-                return $validate->getError();
+                return implode($validate->getError());
             }
         } catch (Exception $e) {
             echo $e->getMessage();
@@ -189,7 +189,7 @@ class Manager extends Model
             unset($data['repass']);
             return $this->insertGetId($data);
         } else {
-            return $validate->getError();
+            return implode($validate->getError());
         }
     }
 
@@ -211,7 +211,7 @@ class Manager extends Model
             unset($data['repass'], $data['admin_mail']);
             return $this->insertGetId($data);
         } else {
-            return $validate->getError();
+            return implode($validate->getError());
         }
     }
 
@@ -248,7 +248,7 @@ class Manager extends Model
             unset($data['repass']);
             return $this->insertGetId($data);
         } else {
-            return $validate->getError();
+            return implode($validate->getError());
         }
     }
 
@@ -307,7 +307,7 @@ class Manager extends Model
             }
             return $this->where(['id' => Request::post('id')])->update($data);
         } else {
-            return $validate->getError();
+            return implode($validate->getError());
         }
     }
     public function modify2()
@@ -339,7 +339,7 @@ class Manager extends Model
             }
             return $this->where(['id' => $session['id']])->update($data);
         } else {
-            return $validate->getError();
+            return implode($validate->getError());
         }
     }
     public function modify3()
@@ -360,7 +360,7 @@ class Manager extends Model
             unset($data['repass']);
             return $this->where(['id' => 1])->update($data);
         } else {
-            return $validate->getError();
+            return implode($validate->getError());
         }
     }
 
