@@ -104,7 +104,7 @@ class Category extends Model
             }
             return $this->insertGetId($data);
         } else {
-            return implode($validate->getError());
+            return $validate->getError();
         }
     }
 
@@ -126,7 +126,7 @@ class Category extends Model
                 }
                 $this->insertGetId($data);
             } else {
-                return implode($validate->getError());
+                return $validate->getError();
             }
         }
         return 1;
@@ -153,7 +153,7 @@ class Category extends Model
             }
             return $this->where(['id' => Request::post('id')])->update($data);
         } else {
-            return implode($validate->getError());
+            return $validate->getError();
         }
     }
 

@@ -70,7 +70,7 @@ class MessageBoard extends Model
             }
             return $this->insertGetId($data);
         } else {
-            return implode($validate->getError());
+            return $validate->getError();
         }
     }
 
@@ -94,7 +94,7 @@ class MessageBoard extends Model
             }
             return $this->where(['id' => Request::post('id')])->update($data);
         } else {
-            return implode($validate->getError());
+            return $validate->getError();
         }
     }
 

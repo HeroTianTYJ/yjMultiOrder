@@ -29,7 +29,7 @@ class Captcha extends Model
         if ($validate->check($data)) {
             return $data;
         } else {
-            return implode($validate->getError());
+            return $validate->getError();
         }
     }
 }

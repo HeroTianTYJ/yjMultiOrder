@@ -77,7 +77,7 @@ class Balance extends Model
             $data['price'] = -Request::post('price');
             return $this->insertGetId($data);
         } else {
-            return implode($validate->getError());
+            return $validate->getError();
         }
     }
 }

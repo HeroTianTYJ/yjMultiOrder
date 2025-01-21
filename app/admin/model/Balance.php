@@ -73,7 +73,7 @@ class Balance extends Model
         if ($validate->check($data)) {
             return $this->where(['id' => Request::post('id')])->update($data);
         } else {
-            return implode($validate->getError());
+            return $validate->getError();
         }
     }
 

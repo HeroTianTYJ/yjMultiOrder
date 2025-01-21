@@ -89,7 +89,7 @@ class Message extends Model
             unset($data['content'], $data['captcha']);
             return $this->insertGetId($data);
         } else {
-            return implode($validate->getError());
+            return $validate->getError();
         }
     }
 

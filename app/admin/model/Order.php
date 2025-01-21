@@ -333,7 +333,7 @@ class Order extends Model
                 'is_recycle' => Request::controller() == 'OrderRecycle' ? 1 : 0
             ])->where($this->managerId())->update($data);
         } else {
-            return implode($validate->getError());
+            return $validate->getError();
         }
     }
 

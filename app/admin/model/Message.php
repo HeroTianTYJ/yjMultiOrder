@@ -93,7 +93,7 @@ class Message extends Model
             unset($data['content'], $data['reply']);
             return $this->where(['id' => Request::post('id')])->update($data);
         } else {
-            return implode($validate->getError());
+            return $validate->getError();
         }
     }
 

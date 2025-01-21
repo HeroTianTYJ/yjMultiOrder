@@ -135,7 +135,7 @@ class Product extends Model
             }
             return $this->insertGetId($data);
         } else {
-            return implode($validate->getError());
+            return $validate->getError();
         }
     }
 
@@ -186,7 +186,7 @@ class Product extends Model
             unset($data['own_price']);
             return $this->where(['id' => Request::post('id')])->update($data);
         } else {
-            return implode($validate->getError());
+            return $validate->getError();
         }
     }
 
