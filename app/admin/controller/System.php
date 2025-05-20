@@ -37,7 +37,7 @@ return [
     'https' => '" . str_replace("'", "\'", Request::post('https', 0)) . "',  //是否强制https
     'manager_enter' => '" . str_replace("'", "\'", Request::post('manager_enter')) . "',  //管理员后台入口
     'distributor_enter' => '" . str_replace("'", "\'", Request::post('distributor_enter')) . "',  //分销商后台入口
-    'copyright_backend' => '" . str_replace("'", "\'", Request::post('copyright_backend', '', 'stripslashes'))
+    'copyright_backend' => '" . str_replace("'", "\'", Request::post('copyright_backend', '', 'htmlspecialchars_decode'))
                     . "',  //登录页版权
     'register' => '" . str_replace("'", "\'", Request::post('register')) . "',  //是否开放注册
     'register_verify' => '" . str_replace("'", "\'", Request::post('register_verify')) . "',  //注册审核
@@ -46,7 +46,7 @@ return [
     'item_id' => '" . str_replace("'", "\'", Request::post('item_id', 0)) . "',  //商品页id
     'index_php' => '" . (Request::post('index_php') == 0 ? 'index.php/' : '') . "',  //隐藏index.php
     'big_pic' => '" . str_replace("'", "\'", Request::post('big_pic')) . "',  //点击图片看大图
-    'code' => '" . str_replace("'", "\'", Request::post('code', '', 'stripslashes')) . "',  //全局第三方代码
+    'code' => '" . str_replace("'", "\'", Request::post('code', '', 'htmlspecialchars_decode')) . "',  //全局第三方代码
     'order_time' => '" . str_replace("'", "\'", Request::post('order_time')) . "',  //防刷单间隔
     'order_search' => '" . str_replace("'", "\'", Request::post('order_search')) . "',  //订单查询
     'order_search_step' => '" . str_replace("'", "\'", Request::post('order_search_step')) . "',  //跨模板查询
@@ -66,13 +66,13 @@ return [
     'qq_app_key' => '" . str_replace("'", "\'", Request::post('qq_app_key')) . "',  //QQ互联AppKey
     'qq_bridge_domain' => '" . Config::get('system.qq_bridge_domain') . "',  //QQ互联回调域名
     'mail_order_subject' => '" . str_replace("'", "\'", Request::post('mail_order_subject')) . "',  //订单提醒邮件标题
-    'mail_order_content' => '" . str_replace("'", "\'", Request::post('mail_order_content', '', 'stripslashes')) .
+    'mail_order_content' => '" . str_replace("'", "\'", Request::post('mail_order_content', '', 'htmlspecialchars_decode')) .
                     "',  //订单提醒邮件内容
     'mail_pay_subject' => '" . str_replace("'", "\'", Request::post('mail_pay_subject')) . "',  //支付提醒邮件标题
-    'mail_pay_content' => '" . str_replace("'", "\'", Request::post('mail_pay_content', '', 'stripslashes')) .
+    'mail_pay_content' => '" . str_replace("'", "\'", Request::post('mail_pay_content', '', 'htmlspecialchars_decode')) .
                     "',  //支付提醒邮件内容
     'mail_send_subject' => '" . str_replace("'", "\'", Request::post('mail_send_subject')) . "',  //发货提醒邮件标题
-    'mail_send_content' => '" . str_replace("'", "\'", Request::post('mail_send_content', '', 'stripslashes')) .
+    'mail_send_content' => '" . str_replace("'", "\'", Request::post('mail_send_content', '', 'htmlspecialchars_decode')) .
                     "',  //发货提醒邮件内容
     'sms_bao_user' => '" . str_replace("'", "\'", Request::post('sms_bao_user')) . "',  //短信宝账号
     'sms_bao_pass' => '" . str_replace("'", "\'", Request::post('sms_bao_pass')) . "',  //短信宝密码

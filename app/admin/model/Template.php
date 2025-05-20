@@ -70,9 +70,9 @@ class Template extends Model
             'captcha_id' => Request::post('captcha_id'),
             'is_sms_verify' => Request::post('is_sms_verify'),
             'is_sms_notify' => Request::post('is_sms_notify'),
-            'success' => Request::post('success', '', 'stripslashes'),
-            'success2' => Request::post('success2', '', 'stripslashes'),
-            'often' => Request::post('often', '', 'stripslashes'),
+            'success' => Request::post('success', '', 'htmlspecialchars_decode'),
+            'success2' => Request::post('success2', '', 'htmlspecialchars_decode'),
+            'often' => Request::post('often', '', 'htmlspecialchars_decode'),
             'date' => time()
         ];
         $validate = new validate();
@@ -143,9 +143,9 @@ class Template extends Model
             'captcha_id' => Request::post('captcha_id'),
             'is_sms_verify' => Request::post('is_sms_verify'),
             'is_sms_notify' => Request::post('is_sms_notify'),
-            'success' => Request::post('success', '', 'stripslashes'),
-            'success2' => Request::post('success2', '', 'stripslashes'),
-            'often' => Request::post('often', '', 'stripslashes')
+            'success' => Request::post('success', '', 'htmlspecialchars_decode'),
+            'success2' => Request::post('success2', '', 'htmlspecialchars_decode'),
+            'often' => Request::post('often', '', 'htmlspecialchars_decode')
         ];
         $validate = new validate();
         if ($validate->check($data)) {

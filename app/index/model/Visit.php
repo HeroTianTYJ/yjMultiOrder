@@ -46,7 +46,7 @@ class Visit extends Model
                 ->where([
                     'ip' => getUserIp(),
                     'manager_id' => $managerId,
-                    'url' => Request::post('url', '', 'stripslashes')
+                    'url' => Request::post('url', '', 'htmlspecialchars_decode')
                 ])
                 ->where('date1', '>=', strtotime(date('Y-m-d') . ' 00:00:00'))
                 ->where('date2', '<=', strtotime(date('Y-m-d') . ' 23:59:59'))
@@ -70,7 +70,7 @@ class Visit extends Model
         return $this->insertGetId([
             'ip' => getUserIp(),
             'manager_id' => $managerId,
-            'url' => Request::post('url', '', 'stripslashes'),
+            'url' => Request::post('url', '', 'htmlspecialchars_decode'),
             'count' => 1,
             'date1' => time(),
             'date2' => time()
