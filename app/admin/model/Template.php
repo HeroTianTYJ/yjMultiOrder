@@ -70,9 +70,9 @@ class Template extends Model
             'captcha_id' => Request::post('captcha_id'),
             'is_sms_verify' => Request::post('is_sms_verify'),
             'is_sms_notify' => Request::post('is_sms_notify'),
-            'success' => Request::post('success', '', 'htmlspecialchars_decode'),
-            'success2' => Request::post('success2', '', 'htmlspecialchars_decode'),
-            'often' => Request::post('often', '', 'htmlspecialchars_decode'),
+            'success' => Request::post('success', '', null),
+            'success2' => Request::post('success2', '', null),
+            'often' => Request::post('often', '', null),
             'date' => time()
         ];
         $validate = new validate();
@@ -143,9 +143,9 @@ class Template extends Model
             'captcha_id' => Request::post('captcha_id'),
             'is_sms_verify' => Request::post('is_sms_verify'),
             'is_sms_notify' => Request::post('is_sms_notify'),
-            'success' => Request::post('success', '', 'htmlspecialchars_decode'),
-            'success2' => Request::post('success2', '', 'htmlspecialchars_decode'),
-            'often' => Request::post('often', '', 'htmlspecialchars_decode')
+            'success' => Request::post('success', '', null),
+            'success2' => Request::post('success2', '', null),
+            'often' => Request::post('often', '', null)
         ];
         $validate = new validate();
         if ($validate->check($data)) {

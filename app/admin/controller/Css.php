@@ -133,7 +133,7 @@ class Css extends Base
                 if (Config::get('app.demo')) {
                     return showTip('演示站，CSS文件无法修改！', 0);
                 }
-                file_put_contents($filepath, Request::post('code', '', 'htmlspecialchars_decode'));
+                file_put_contents($filepath, Request::post('code', '', null));
                 return showTip([
                     'msg' => 'CSS文件修改成功！',
                     'data' => $this->listItem($Css->one())
