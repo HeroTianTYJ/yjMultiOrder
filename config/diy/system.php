@@ -14,7 +14,7 @@ return [
     'https' => '0',  //是否强制https
     'manager_enter' => 'admin.php',  //管理员后台入口
     'distributor_enter' => 'distributor.php',  //分销商后台入口
-    'copyright_backend' => '<a href="https://www.yjrj.cn/" target="_blank">昱杰软件</a> © 版权所有',  //登录页版权
+    'copyright_backend' => '<a href="https://www.yjrj.cn/" target="_blank">昱杰软件</a><sup>®</sup> © 版权所有',  //登录页版权
     'register' => '3',  //是否开放注册
     'register_verify' => '1',  //注册审核
     'home_page' => '2',  //首页显示
